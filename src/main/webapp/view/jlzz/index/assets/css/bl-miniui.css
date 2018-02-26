@@ -1,0 +1,221 @@
+
+/* 全局辅助类 */
+.body-fit {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.pos-abs {
+  position: absolute;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+/* 文本偏移辅助类 */
+.text-center-xs {
+  text-align: center;
+}
+.text-left-xs {
+  text-align: left;
+}
+.text-right-xs {
+  text-align: right;
+}
+
+/* 宽度辅助类 */
+
+.w-xxs {
+  width: 60px;
+}
+.w-xs {
+  width: 90px;
+}
+.w-sm {
+  width: 150px;
+}
+.w {
+  width: 200px;
+}
+.w-md {
+  width: 240px;
+}
+.w-lg {
+  width: 280px;
+}
+.w-xl {
+  width: 320px;
+}
+.w-xxl {
+  width: 360px;
+}
+.w-full {
+  width: 100%;
+}
+.w-auto {
+  width: auto;
+}
+
+/* 盒模型辅助类 */
+.border-box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/* 边框颜色辅助类 */
+
+.border-light {
+  border: 1px solid #c5c5c5;
+}
+
+/* 内边距辅助类 */
+
+.padder-none {
+  padding: 0px;
+}
+
+.padder-v-none {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.padder-h-none {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.padder-xs {
+  padding: 5px;
+}
+
+.padder-sm {
+  padding: 10px;
+}
+
+.padder-md {
+  padding: 15px;
+}
+
+.padder-lg {
+  padding: 20px;
+}
+
+.padder-l-xs {
+  padding-left: 5px;
+}
+
+.padder-l-sm {
+  padding-left: 10px;
+}
+
+.padder-r-xs {
+  padding-right: 5px;
+}
+
+.padder-r-sm {
+  padding-right: 10px;
+}
+
+
+
+/* 边框辅助类 */
+
+.b-radius {
+  border-radius: 4px;
+}
+
+.b-radius-none {
+  border-radius: 0;
+}
+
+.b-none {
+  border: 0px;
+}
+
+.b-l-none {
+  border-left: 0px;
+}
+
+.b-t-none {
+  border-top: 0px;
+}
+
+.b-r-none {
+  border-right: 0px;
+}
+
+.b-b-none {
+  border-bottom: 0px;
+}
+
+
+/* 背景色辅助类 */
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-light {
+  background-color: #EEEEEE;
+}
+
+/* 外边距辅助类 */
+
+.m-t-xs {
+  margin-top: 5px;
+}
+
+.m-t-sm {
+  margin-top: 10px;
+}
+
+.m-r-xs {
+  margin-right: 5px;
+}
+
+.m-r-sm {
+  margin-right: 10px;
+}
+
+/* 文本颜色辅助类 */
+
+.text-white {
+  color: #FFF;
+}
+
+.text-black {
+  color: #000;
+}
+
+/* 文本字体辅助类 */
+.text-bold {
+  font-weight: bold;
+}
+
+
+/* 表单辅助类 */
+
+.form-label-right {
+  text-align: right;
+}

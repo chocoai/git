@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+	<title>流程编辑</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link href="#(g_path)/css/font-awesome-4.7.0/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css">
+	<link href="#(g_path)/view/sys/flow/css/iconfont.css"
+		rel="stylesheet" type="text/css">
+	<link href="#(g_path)/view/sys/flow/css/lpflowedit.css"
+		rel="stylesheet" type="text/css">
+    <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+    <script type="text/javascript" src="#(g_path)/view/sys/flow/js/pois.js"></script>
+    <script type="text/javascript" src="#(g_path)/view/sys/flow/js/lpflowedit.js"></script>
+	<!--[if lt IE 9]>
+	<?import namespace="v" implementation="#default#VML" ?>
+	<![endif]-->
+  </head>
+  <body>
+
+  <div class="topbar">
+  	<span></span>
+  	<span></span>
+  	<span></span>
+  	<a id="btnSave" class="btn bluetext" title="保存">
+  		<i class="fa fa-floppy-o" aria-hidden="true"></i>
+  	</a>
+  	<a id="btnUndo" class="btn warningtext" title="撤消">
+  		<i class="fa fa-undo" aria-hidden="true"></i>
+  	</a>
+  	<a id="btnRedo" class="btn warningtext" title="重做">
+  		<i class="fa fa-repeat" aria-hidden="true"></i>
+  	</a>
+  	<span></span>
+  	<a id="btnYCenter" class="btn bluetext" title="居中对齐">
+  		<i class="iconfont2 icon-juzhongduiqi" aria-hidden="true"></i>
+  	</a>
+  	<a id="btnXCenter" class="btn bluetext" title="中间对齐">
+  		<i class="iconfont2 icon-duiqi" aria-hidden="true"></i>
+  	</a>
+  	<span></span>
+  	<span></span>
+  	<span></span>
+  	<a id="btnSel" class="btn successtext btnsel active" title="选择" state="sel">
+  		<i class="iconfont icon-xuanze" aria-hidden="true"></i>
+  	</a>
+  	<a class="btn successtext btnsel" title="迁移线" state="line" val="0">
+  		<i class="iconfont icon-zhuanyi" aria-hidden="true" ></i>
+  	</a>
+  	<a class="btn successtext btnsel" title="回退线" state="line" val="1">
+  		<i class="iconfont icon-tuihui" aria-hidden="true" style="color: red"></i>
+  	</a>
+  	<span></span>
+  	<a class="btn successtext btnsel" title="开始节点" state="node" val="0">
+  		<i class="iconfont icon-kaishijiedian" aria-hidden="true"></i>
+  	</a>
+  	<a class="btn successtext btnsel" title="普通节点" state="node" val="1">
+  		<i class="fa fa-users" aria-hidden="true"></i>
+  	</a>
+  	<a class="btn successtext btnsel" title="子流程节点" state="node" val="2">
+  		<i class="iconfont icon-zijiedian" aria-hidden="true"></i>
+  	</a>
+  	<a class="btn successtext btnsel" title="自动节点" state="node" val="3">
+  		<i class="iconfont icon-zidongjiedian" aria-hidden="true"></i>
+  	</a>
+  	<a class="btn successtext btnsel" title="结束节点" state="node" val="9">
+  		<i class="iconfont icon-jieshujiedian" aria-hidden="true"></i>
+  	</a>
+
+  </div>
+  <div class="mini-fit">
+  	<div id="layout1" class="mini-layout" style="width:100%;height:100%;"  borderStyle="border:solid 1px #aaa;">
+	    <div title="属性" region="east" width="250" showProxyText="true"  showCloseButton="false" showSplitIcon="true">
+	        <table class="progrid" border="0" cellpadding="0" cellspacing="1" style="width:100%;table-layout:fixed;">
+	        	<tr>
+	        		<td class="progrid-label"><label>对象类型</label></td>
+	        		<td class="progrid-edit">
+	        			<span id="lbSelObjType" class="txt">流程</span>
+	        		</td>
+	        	</tr>
+	        </table>
+	    </div>
+	    <div title="center" region="center" >
+	    	<div id="lpflowchar" style="width: 100%; height: 100%">
+
+			</div>
+	    </div>
+	</div>
+  </div>
+
+</body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+
+
+var opt = {
+	editable : true,
+	flowDataObj : #(josnText)
+}
+new jQuery.LPFlowChar($("#lpflowchar"),opt);
+
+/* function test(){
+	var opt = {
+			editable : true,
+			flowDataObj : {
+				id : "1",
+				flowversionid : "xx",
+				flowname : "xxx",
+				wfs_flownode_list : [],
+				wfs_flowtrans_list : []
+			}
+		}
+	new jQuery.LPFlowChar($("#lpflowchar"),opt);
+}
+
+test(); */
+</script>

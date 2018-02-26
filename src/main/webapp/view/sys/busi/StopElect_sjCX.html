@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/default/miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/bl-miniui/skin.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/res/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="#(g_path)/view/jlzz/index/assets/css/bl-miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/hnjl-index.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/font/iconfont.css" rel="stylesheet">
+    </head>
+    <body class="body-fit">
+        <div id="searchForm" class="mini-panel mini-panel-success" title="指标汇总" style="width: 100%; height: 180px;" >
+            <table cellpadding="6" cellspacing="1" style="width:100%; ">
+                <tr>
+                    <td style="text-align: right">开始时间:</td>
+                    <td>
+                        <input #@bv("tdkssj") class="mini-datepicker" value="" />
+                    </td>
+                    <td style="text-align: right">结束时间:</td>
+                    <td>
+                        <input #@bv("tdjssj") class="mini-datepicker" value="" />
+                    </td>
+                    <td style="text-align: right">所属线路:</td>
+                    <td>
+                        <input #@bv("xlmc")  class="mini-textbox" />
+                    </td>
+                    <td style="text-align: right">地区特征:</td>
+                    <td>
+                        <input #@bv("dqtzdm")  class="mini-combobox"   url="#(g_path)/StopElect/tdtzSelect"  textField="text" valueField="id"  />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: right">用户名称:</td>
+                    <td >
+                        <input #@bv("yhmc")  class="mini-combobox" url="#(g_path)/StopElect/yhmcSelect"   textField="text" valueField="id" />
+                    </td>
+                    <td style="text-align: right">用户编号:</td>
+                    <td >
+                        <input #@bv("yhbh")  class="mini-combobox" />
+                    </td>
+                    <td style="text-align: right">用户性质:</td>
+                    <td>
+                        <input #@bv("yhxz")  class="mini-combobox" url="#(g_path)/StopElect/yhxzSelect"  textField="text" valueField="id" />
+                    </td>
+                    <td style="text-align: right">数据来源:</td>
+                    <td>
+                        <input #@bv("sjly")  class="mini-combobox" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="text-align: right">停电分析:</td>
+                    <td >
+                        <input #@bv("tdfxdm") class="mini-combobox"  />
+                    </td>
+                    <td style="text-align: right">停电时长:</td>
+                    <td >
+                        <input #@bv("tdsc") class="mini-combobox" url="#(g_path)/StopElect/tdflSelect"  textField="text" valueField="id" />
+                    </td>
+                    <td style="text-align: right">是否发送营销:</td>
+                    <td>
+                        <input #@bv("sddsyxdm")  class="mini-combobox" />
+                    </td>
+                    <!--                          <td style="text-align: right">数据来源:</td>-->
+                    <td>
+                        <!--                         <input id=""  class="mini-combobox" />-->
+                    </td>
+                    <td> <a class="mini-button mini-button-primary" onclick="onsearch();" ><i class="fa fa-search fa-lg"></i> 查询</a></td>
+                </tr>
+
+
+            </table>
+        </div>
+        <div class="mini-fit">
+            <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" 
+                 url="#(g_path)/StopElect/getList" idField="id" 
+                 allowResize="true" sizeList="[30,50,100,500]" pageSize="50" 
+                 allowCellEdit="true" allowCellSelect="true" multiSelect="true" 
+                 editNextOnEnterKey="true"  editNextRowCell="true" 
+
+                 >
+                <div property="columns">
+                    <div type="checkcolumn"></div>
+                    <div type="indexcolumn">序号</div>
+                    <div field="dqbm" width="60" headerAlign="center" align="center" allowSort="false" renderer="onActionRenderer">管理机构</div> 
+                    <div field="yhmc" width="60" headerAlign="center" align="center" allowSort="false" >用户名称</div>
+                    <div field="yhbh" width="60" headerAlign="center" align="center" allowSort="false" >用户编号</div>
+                    <div field="yhxz" width="60" headerAlign="center" align="center" allowSort="false" >用户性质</div>
+                    <div field="dqtzdm" width="60" headerAlign="center" align="center" allowSort="false" >地区特征</div>	
+                    <div field="tdkssj" width="60" headerAlign="center" align="center" allowSort="false" >停电开始时间</div>
+                    <div field="tdjssj" width="60" headerAlign="center" align="center" allowSort="false" >停电结束时间</div>
+                    <div field="tdsc" width="60" headerAlign="center" align="center" allowSort="false" >停电时长（分）</div> 
+                    <div field="xlmc" width="60" headerAlign="center" align="center" allowSort="false" >所属线路</div>
+                    <div field="" width="60" headerAlign="center" align="center" allowSort="false" >所属厂站</div>
+                    <div field="sjly" width="60" headerAlign="center" align="center" allowSort="false" >数据来源</div>
+
+                </div>
+            </div> 
+        </div>
+
+
+    </body>
+</html>
+<script type="text/javascript">
+    
+    mini.parse();
+    var grid = mini.get("datagrid1");
+    onsearch();
+
+    function onsearch() {
+        var form = new mini.Form("#searchForm");
+        var param = form.getData(true, false);
+        grid.load(param);
+    }
+
+</script>

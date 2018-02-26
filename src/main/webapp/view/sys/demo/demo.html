@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>miniui列表查询界面开发示例</title>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+	  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+  </head>
+  <body>
+  	<ul>
+  		<li><a href="javascript:go('mini ui列表查询开发示例','#(g_path)/sys/demo/miniui_showlist')">mini ui列表查询开发示例</a></li>
+  		<li><a href="javascript:go('element ui 列表查询开发示例','#(g_path)/sys/demo/elementui_showlist')">element ui 列表查询开发示例</a></li>
+  		<li><a href="javascript:go('代码生成器工具','#(g_path)/sys/generator/index')">代码生成器工具</a></li>
+  		<li><a href="javascript:go('启动测试流程','#(g_path)/demo/flowtest/openflow')">启动测试流程</a></li>
+  		
+  	</ul>
+  	<script type="text/javascript">
+  		function go(title,url){
+  			if(window.top.LPMainPage){
+				window.top.LPMainPage.openPage(title,url);
+			}
+			else{
+				window.open(url);
+			}
+  		}
+  	</script>
+  </body>
+</html>

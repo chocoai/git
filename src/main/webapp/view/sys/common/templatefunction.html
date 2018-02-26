@@ -1,0 +1,27 @@
+#define bv(field) id="data.#(field)" name="data.#(field)" value="#escape(data.get(field)??)" #end
+
+#define bv2(field,pfx,dataModel) id="#if(pfx)#(pfx)#end#(field)" name="#if(pfx)#(pfx)#end#(field)" value="#escape(dataModel.get(field) ?? )" #end
+
+#define lpflow_js()
+
+	<!-- 开始生成LP流程相关JS -->
+	#if(g_flowinstanceid)
+	<script type="text/javascript">
+		window.g_path="#(g_path)";//网站虚拟目录
+		window.g_iscreateform="#(g_iscreateform)";//是否新创建
+		window.g_formdataversion="#escape(g_formdataversion)";//保存冲突版本号
+		window.g_isreadonly="#escape(g_isreadonly)";//页面是否只读
+		window.g_flowid="#escape(g_flowid)";//流程id
+		window.g_flowversionid="#escape(g_flowversionid)";//流程版本id
+		window.g_flownodeid="#escape(g_flownodeid)";//流程节点id
+		window.g_flownodename="#escape(g_flownodename)";//流程节点名称
+		window.g_flownodetype="#escape(g_flownodetype)";//流程节点类型
+		window.g_flownodeembranch="#escape(g_flownodeembranch)";//流程节点分支模式
+		window.g_flowinstanceid="#escape(g_flowinstanceid)";//流程实例id
+		window.g_flownodeinstanceid="#escape(g_flownodeinstanceid)";//流程节点实例id
+	</script>
+	<script src="#(g_path)/view/sys/flow/js/lpflowsubmit.js" type="text/javascript"></script>
+	<!-- 结束生成LP流程相关JS -->
+	
+	#end
+#end

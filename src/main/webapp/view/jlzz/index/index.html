@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>省级计量首页</title>
+
+  <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/default/miniui.css" rel="stylesheet">
+  <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/bl-miniui/skin.css" rel="stylesheet">
+  <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/res/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+  <link href="#(g_path)/view/jlzz/index/assets/css/bl-miniui.css" rel="stylesheet">
+  <link href="#(g_path)/view/jlzz/index/assets/css/hnjl-index.css" rel="stylesheet">
+  <link href="#(g_path)/view/jlzz/index/assets/css/font/iconfont.css" rel="stylesheet">
+
+  <style type="text/css">
+
+
+  </style>
+
+</head>
+<body class="body-fit">
+
+  <!--顶部栏-->
+  <div class="header-container">
+      <span class="sys-name"><i class="iconfont icon-nanwanglogo"></i><div class="fgx"></div>省级计量自动化系统</span>
+         <div class="right-buttons-container">
+      <a href="#">
+        <i class="fa fa-bell "></i>
+        <span class="mark red-mark">2</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-envelope  "></i>
+        <span class="mark yellow-mark">4</span>
+      </a>
+      <a href="#">
+        <i class="fa fa-align-left  "></i>
+        <span class="mark green-mark">4</span>
+      </a> 
+      <a href="#" class="login" >
+	      <div id="userName">
+	        <i class="fa fa-user"></i>
+	        <span style="margin: 0 3px;">张小梅[生技部]</span>
+	        <i class="fa fa-caret-down"></i>
+	      </div>
+        <div id="user-box" class="use-box">
+        		<div>当前角色：供电局-专责</div>
+        		<div class="changeUser"><i class="iconfont icon-jiaoseqiehuan"></i>切换角色</div>
+        		<div onclick="javascript:onLogout()"><i class="fa fa-power-off "></i>退出</div>
+        </div>
+      </a> 
+      
+    </div>
+    
+    
+    
+    
+<div class="nav-container">
+      <ul class="nav-menu-ul">
+           #for(level1Item : menuList)
+        <li>
+            <a href="#"><i class="#(level1Item.iconcls)"></i>#(level1Item.text)</a>
+          <div class="nav-menu-items-container">
+              <span class="sp-up"><i class="fa fa-sort-up"></i></span>
+            #for(level2Item : level1Item.childs)
+            <div class="items-header">
+                <i class="#(level2Item.iconcls)"></i><a href="#">#(level2Item.text)</a>
+            </div>
+            <div class="container">
+              <div class="mini-clearfix">
+                #for(level3Item : level2Item.childs)
+                <div class="mini-col-4"><a href="#(g_path)#(level3Item.url)">#(level3Item.text)</a></div>
+                #end
+              </div>
+            </div>
+            #end
+          </div>
+        </li>
+        #end
+     </ul>
+    </div>
+  </div>       
+      
+
+  <!--左侧静止菜单栏--->
+  <div class="left-fit-menu">
+		<div class="left-btn" id="btn-close"><i class="iconfont icon-zuoyi"></i></div>
+    <ul class="menu-ul">
+      <li target="sc" class="active"><span>收藏</span></li>
+      <li target="zw"><span>主网</span></li>
+      <li target="pw"><span>配网</span></li>
+      <li target="liebiao"><span>列表</span></li>
+    </ul>
+  </div>
+
+  <!--主内容区-->
+   <div class="main-container">
+
+    <!--主内容区splitter容器-->
+     <div id="mainSplitter" class="mini-splitter" style="width:100%; height:100%;" borderStyle="border-left:0;border-top:0;border-bottom:0;" handlerSize="5">
+
+      <div  size="240px" showCollapseButton="false"  minSize="240"
+           style="background-color: #E4F0FE; border: 0px;
+            -moz-box-shadow:2px 0px 10px #eaf4fe; -webkit-box-shadow:2px 0px 10px #eaf4fe; box-shadow:2px 0px 10px #eaf4fe;">
+
+       <div style="width: 100%; height: calc(100% - 0px);">
+          <div id="sc" style="width: 100%; height: 100%;">
+            <iframe src="sc" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+          </div>
+          <div id="zw" style="width: 100%; height: 100%;">
+          	<iframe src="zwTree" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+          </div>
+          <div id="pw" style="width: 100%; height: 100%;">
+            <iframe src="pwTree" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+          </div>
+          <div id="liebiao" style="width: 100%; height: 100%;">
+            
+              <iframe src="lieBiao" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div showCollapseButton="false"  style="border:0;">
+
+        <div id="mainTabs" class="mini-tabs" activeIndex="0"
+             style="width:100%; height:100%; " tabPosition="bottom" borderStyle="bordere:0;"
+             contextMenu="#mainTabsMenu">
+          <div title="首页" showCloseButton='false'>
+				
+          </div>
+        </div>
+
+        <ul id="mainTabsMenu" class="mini-contextmenu" onbeforeopen="onBeforeOpen">
+          <li onclick="refreshTab">刷新 (E)</li>
+          <li class="separator"></li>
+          <li onclick="closeCurrentTab">关闭标签页 (D)</li>
+          <li onclick="closeOtherTabs">关闭其他标签页</li>
+          <li onclick="closeRightTabs">关闭右侧标签页</li>
+          <li onclick="closeAllTabs">关闭所有标签页</li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="#(g_path)/view/jlzz/index/assets/scripts/jquery-1.6.2.min.js"></script>
+  <script src="#(g_path)/view/jlzz/index/assets/scripts/miniui/miniui.js"></script>
+  <script src="#(g_path)/view/jlzz/index/assets/js/hnjl-index.js"></script>
+
+  <script>
+
+		var mainSplitter;
+		
+    $(function () {
+//    	console.log("#(menuList)");
+    	mainSplitter = mini.get("mainSplitter");
+    	
+      $(".nav-menu-ul li .nav-menu-items-container .container .mini-clearfix .mini-col-4 a").click(function (e) {
+        clearFirstNavActive();
+        clearSecondNavActive();
+        $(e.currentTarget).addClass('active');
+        $(e.currentTarget).parent().parent().parent().parent().parent().children("a").addClass("active");
+        addMainTab(e.currentTarget.text, e.currentTarget.href);
+        e.preventDefault();
+      });
+
+      $(".left-fit-menu li").click(function (e) {
+	    	var nodeId = $(this).attr("target");
+        $(".left-content").hide();
+        $(".left-fit-menu li").removeClass("active");
+        $(this).addClass("active");
+        $("#" + nodeId).siblings().hide();
+        $("#" + nodeId).show();
+      });
+      
+      $("#userName").click(function (e) { 
+      	   $("#user-box").toggle(100);
+      });
+      
+       $("#btn-close").click(function (e) { 
+       	var isTrue = mainSplitter.getPane(1).expanded;
+       	if(isTrue){
+      	   	mainSplitter.collapsePane(1);
+      	}else{
+      			mainSplitter.expandPane(1);
+      	}
+      });
+      
+    });
+
+    function clearFirstNavActive() {
+      $(".nav-menu-ul li a").removeClass("active");
+    }
+
+    function clearSecondNavActive() {
+      $(".nav-menu-ul li .nav-menu-items-container .container .mini-clearfix .mini-col-4 a").removeClass('active');
+    }
+
+
+
+
+function onLogout(){
+    	$.post("dologout",function(re){
+    		window.location = "login";
+    	});
+	}
+    
+    function showTab(node,isRefresh) {
+        var mtabs = mini.get("mainTabs");
+
+        var id = "tab$" + node.id;
+        var tab = mtabs.getTab(id);
+        if (!tab) {
+            tab = {};
+            tab.name = id;
+            tab.title = node.text;
+            tab.showCloseButton = true;
+            var url = node.url;
+            var httpReg=new RegExp("^http:\/\/");
+            if(!httpReg.test(url))
+            	url = "#(g_path)"+node.url;
+            tab.url=url;
+            mtabs.addTab(tab);
+            mtabs.activeTab(tab);
+        }
+        else{
+        	mtabs.activeTab(tab);
+        	if(isRefresh)
+        		mtabs.reloadTab(tab);
+        }
+    }
+    
+    var LPMainPage = {
+    		openPage : function(node,isRefresh) {
+    			showTab(node,isRefresh);
+	        },
+	        closePage : function(win){
+	        	var tabIndex = -1;
+	        	var tabs = mini.get("mainTabs").getTabs();
+				for(var i=0; i < tabs.length; i++){
+					var frame = mini.get("mainTabs").getTabIFrameEl(tabs[i]);
+					if(frame && frame.contentWindow == win){
+						tabIndex = i;
+						break;
+					}
+				}
+				
+				if(tabIndex > -1){
+					mini.get("mainTabs").removeTab(tabIndex);
+				}
+	        },
+	        invokeEvent : function(eventName){
+	        	if(eventName == "waitdo"){
+	        		refreshWaitDo();
+	        	}
+	        	var tabs = mini.get("mainTabs").getTabs();
+				for(var i=0; i < tabs.length; i++){
+					var frame = mini.get("mainTabs").getTabIFrameEl(tabs[i]);
+					if(frame && frame.contentWindow){
+						if(frame.contentWindow.LPPageEventReceiver){
+							frame.contentWindow.LPPageEventReceiver(eventName);
+						}
+					}
+				}
+	        }
+    	}
+
+        
+  </script>
+
+</body>
+</html>

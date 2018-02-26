@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/default/miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/bl-miniui/skin.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/res/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="#(g_path)/view/jlzz/index/assets/css/bl-miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/hnjl-index.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/font/iconfont.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="tabs1" class="mini-tabs"  activeIndex="3" style="width:100%;" >
+    <div title="部门" >
+    </div>
+    <div title="厂站" url="/biandianzhan/index">
+        
+    </div>
+    <div title="线路"  url="/xianlu/index">
+        
+    </div>
+    <div title="台区" url="/taiqu/index">
+        
+    </div>
+    <div title="变压器" url="/bianyaqi/first" >
+        
+    </div>
+    <div title="用户"url="/YongHu/first" >
+        
+    </div>
+    <div title="终端" url="/ZhongDuanDNL/index">
+        
+    </div>
+    <div title="采集器" url="/CaiJiDian/first">
+        
+    </div>
+    <div title="计量点" url="/jiliangdian_peibian/jiliangdian">
+        
+    </div>
+    <div title="SIM卡" url="/simka/index">
+        
+    </div>
+            
+</div>
+    </body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+    var tabs = mini.get("tabs1");
+    
+//    tabs.on("beforeactivechanged", function (e) {
+//            if (e.tab.title == "部门") {
+//                alert("部门");
+//            }
+//            if (e.tab.title == "厂站") {
+//                alert("厂站");
+//            }
+//            if (e.tab.title == "台区") {
+//                alert("台区");
+//            }
+//        });
+
+   function getActiveTab(e){
+       alert(e)
+   }
+    
+   $(function(){
+       
+       var _height=$(window).height()-20;
+       $("#tabs1").css("height",_height);
+       if("#(type)"=="org"){
+           var url = "#(g_path)/bumen_zhuti/orgCx?id=#(id)";
+           tabs.activeTab(0);
+           tabs.getActiveTab();
+           tabs.loadTab(url,0);
+       }else if("#(type)"=="line"){
+           var url = "#(g_path)/xianlu/xianluCx?id=#(id)";
+           tabs.activeTab(2);
+           tabs.loadTab(url,2);
+       }else if("#(type)"=="sub"){
+           var url = "#(g_path)/biandianzhan/bdzCx?id=#(id)";
+           tabs.activeTab(1);
+           tabs.loadTab(url,1);
+       }else if("#(type)"=="cons"){
+           var url = "#(g_path)/YongHu/yhxxCx?id=#(id)";
+           tabs.activeTab(5);
+           tabs.loadTab(url,5);
+       }else if("#(type)"=="tmnl"){
+           var url = "#(g_path)/ZhongDuanDNL/zhongduanCx?id=#(id)";
+           tabs.activeTab(6);
+           tabs.loadTab(url,6);
+       }else if("#(type)"=="mp"){
+           var url = "#(g_path)/jiliangdian_peibian/jld_pbCx?id=#(id)";
+           tabs.activeTab(8);
+           tabs.loadTab(url,8);
+       }else if("#(type)"=="coll"){
+           var url = "#(g_path)/CaiJiDian/CaiJiDianCx?id=#(id)";
+           tabs.activeTab(7);
+           tabs.loadTab(url,7);
+       }else if("#(type)"=="tq"){
+           var url = "#(g_path)/taiqu/taiquCx?id=#(id)";
+           tabs.activeTab(3);
+           tabs.loadTab(url,3);
+       }else if("#(type)"=="tran"){
+           var url = "#(g_path)/bianyaqi/bianyaqi?id=#(id)";
+           tabs.activeTab(4);
+           tabs.loadTab(url,4);
+       }else if("#(type)"=="sim"){
+           var url = "#(g_path)/simka/simCx?id=#(id)";
+           tabs.activeTab(9);
+           tabs.loadTab(url,9);
+       }else if("#(type)"==""){
+          // var url = "#(g_path)/biandianzhan/bdzCx?id=0410";
+           var url = "#(g_path)/bumen_zhuti/orgCx?id=0410"
+           tabs.activeTab(0);
+           tabs.loadTab(url,0);
+       }
+   })
+</script>

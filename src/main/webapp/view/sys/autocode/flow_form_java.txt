@@ -1,0 +1,147 @@
+package #(projectName).controller#(modelName ? "." + modelName : "");
+
+import com.alibaba.fastjson.JSONArray;
+import com.blit.lp.bus.flow.FlowInstance;
+import com.blit.lp.core.exception.SysException;
+import com.blit.lp.jf.config.LPController;
+import com.blit.lp.jf.interceptor.flow.LPFlowOpen;
+import com.blit.lp.jf.interceptor.flow.LPFlowSave;
+
+import com.blit.lp.tools.DSqlKit;
+import com.blit.lp.tools.LPRecordKit;
+import com.jfinal.aop.Before;
+import com.jfinal.core.Controller;
+import com.jfinal.ext.LPJsonRender;
+
+import com.jfinal.kit.Ret;
+import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
+import com.jfinal.plugin.activerecord.tx.TxConfig;
+
+
+@LPController(controllerkey = "#(controllerPath)")
+public class #(pfx)Controller extends Controller {
+	@LPFlowOpen(flowid="xxx")
+	public void openflow(){
+		String i = getPara("i");
+		if(StrKit.notBlank(i)){
+			Record data = Db#(ds ? ".use(\"" + ds +"\")" : "").findFirst("select * from #(tableName) where #(tableMeta.primaryKey) = ?", i);
+			if(data == null)
+				throw new SysException("编辑的业务数据丢失：id:" + i);
+			setAttr("data", data);
+		}
+		renderTemplate("#(viewPath0)");
+	}
+	
+	@LPFlowSave(ischeckdataversion=true)
+	public void saveflow(){
+		String g_iscreateform = getPara("g_iscreateform");
+		String g_flowinstanceid = getPara("g_flowinstanceid");
+		String g_flownodetype = getPara("g_flownodetype");
+		
+		Record row = LPRecordKit.createFromRequest(#(ds ? "\"" + ds +"\"," : "")"#(tableName)","data.");
+		row.set("#(tableMeta.primaryKey)", g_flowinstanceid);
+
+		if("true".equals(g_iscreateform)){
+			Db#(ds ? ".use(\"" + ds +"\")" : "").save("#(tableName)", "#(tableMeta.primaryKey)", row);
+		}
+		else{
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("#(tableName)", "#(tableMeta.primaryKey)", row);
+		}
+		
+		/* 设置流程参数
+		if(g_flownodetype.equals("0")){
+			FlowInstance fi = getAttr("flow");
+			fi.setParam("xxx", row.getStr("xxx"));
+		}*/
+		
+	}
+	
+	#(ds ? "@TxConfig(\"" + ds +"\")" : "")
+	@Before(Tx.class)
+	public void delflow(){
+		String g_iscreateform = getPara("g_iscreateform");
+		String g_flowinstanceid = getPara("g_flowinstanceid");
+		if("false".equals(g_iscreateform)){
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from #(tableName) where #(tableMeta.primaryKey)=?",g_flowinstanceid);
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from lp_wfi_flow where id=?",g_flowinstanceid);
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from lp_wfi_flownode where flowinstanceid=?",g_flowinstanceid);
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from lp_wfi_param where flowinstanceid=?",g_flowinstanceid);
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from lp_wfi_waitdo where flowinstanceid=?",g_flowinstanceid);
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from lp_wfi_receiver where flownodeinstanceid in (select id from lp_wfi_flownode where flowinstanceid=?)",g_flowinstanceid);
+			Db#(ds ? ".use(\"" + ds +"\")" : "").update("delete from lp_wfi_operator where flownodeinstanceid in (select id from lp_wfi_flownode where flowinstanceid=?)",g_flowinstanceid);
+		}
+		renderJson(Ret.ok());
+	}
+	
+	public void viewflow(){
+		String i = getPara("i");
+		if(StrKit.notBlank(i)){
+			Record data = Db#(ds ? ".use(\"" + ds +"\")" : "").findFirst("select * from #(tableName) where #(tableMeta.primaryKey) = ?", i);
+			if(data == null)
+				throw new SysException("查看的业务数据丢失：id:" + i);
+			setAttr("data", data);
+		}
+		
+		setAttr("g_flowinstanceid", i);
+		setAttr("g_iscreateform", "false");
+		setAttr("g_isreadonly", "true");
+		renderTemplate("#(viewPath0)");
+	}
+	
+	public void showlist() {
+		renderTemplate("#(viewPath1)");
+	}
+	
+	public void list() {
+		int pageIndex = getParaToInt("pageIndex") + 1;
+		int pageSize = getParaToInt("pageSize");
+		
+		String select = loadFilter();
+
+		Page<Record> page =  Db#(ds ? ".use(\"" + ds +"\")" : "").paginate(pageIndex, pageSize,select,
+				DSqlKit.getSql(),DSqlKit.getParamList());
+		renderJson(new LPJsonRender(Ret.ok()
+				.set("total", page.getTotalRow())
+				.set("data", page.getList())));
+	}
+	
+	//查询条件
+	private String loadFilter(){
+		String select="select * ";
+		DSqlKit.init(" from #(tableName) where 1=1 ");
+		
+		/*		 
+		String key = getPara("key");
+		if(StrKit.notBlank(key)){
+			DSqlKit.append(" and xxx like ?", "%" +key+ "%");
+		}
+		
+		String time1 = getPara("time1");
+		if(StrKit.notBlank(time1)){
+			DSqlKit.append(" and xxx >=?", new Timestamp(DateKit.parse(time1 + " 00:00:00").getTime()));
+		}
+		
+		String time2 = getPara("time2");
+		if(StrKit.notBlank(time2)){
+			DSqlKit.append(" and xxx <=?", new Timestamp(DateKit.parse(time2 + " 23:59:59").getTime()));
+		}*/
+		
+		//添加排序
+		DSqlKit.append(" order by ");
+		String sortFields = getPara("sortFields");
+		if(StrKit.notBlank(sortFields)){
+			JSONArray sortAr = JSONArray.parseArray(sortFields);
+			for(int i=0; i < sortAr.size(); i++){
+				DSqlKit.append(" " +sortAr.getJSONObject(i).getString("field")+ " " +sortAr.getJSONObject(i).getString("dir")+ ", ");
+			}
+		}
+		DSqlKit.append(" #(tableMeta.primaryKey) desc ");
+		
+		return select;
+	}
+}
+

@@ -1,0 +1,11 @@
+**************************************************************************
+Record row = new Record();
+#for(col : tableMeta.columnMetas)
+#if(col.name == tableMeta.primaryKey)row.set("#(col.name)",GuidKit.createGuid());
+#else
+row.set("#(col.name)",#if(col.javaType=="java.util.Date")new java.sql.Timestamp(new java.util.Date().getTime())#else "#(col.remarks ?? col.name)"#end);
+#end 
+#end
+Db.save("#(tableName)","#(tableMeta.primaryKey)",row);	 
+
+************************************************************************** 

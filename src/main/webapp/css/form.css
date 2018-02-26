@@ -1,0 +1,197 @@
+
+.op_tool{
+    height:40px;margin:5px 0;
+    border-bottom:1px dotted  #ccc;margin:10px 0;padding:0;
+}
+.pull_left
+{
+    float:left;
+}
+.pull_right
+{
+    float:right;
+
+}
+.op_tool .pull_left,.op_tool .pull_right{
+    padding: 8px 30px;
+}
+
+#editForm td{
+    padding: 3px 20px 3px 3px;
+}
+
+#editForm .editlabel{
+    width : 120px;
+    text-align: right;
+    padding-right: 3px;
+}
+
+
+.plucontainer
+{
+    position: relative;
+    font-size: 12px;
+}
+
+.plureadonly{
+    /*background-color: #e0e3e6;*/
+}
+
+.pluaddfilelink
+{
+    position: relative;
+    font-size: 12px;
+    color : #0f6099;
+    line-height : 22px;
+    padding: 0px 10px 0px 16px;
+    margin: 2px 0;
+    cursor : pointer;
+    display : block;
+    float: left;
+    clear: right;
+    border-radius : 8px;
+    text-decoration : none;
+}
+
+
+.pluaddfilelinkattach {
+    background: url("cmps.png") no-repeat scroll 0 0;
+    height: 12px;
+    left: 5px;
+    overflow: hidden;
+    position: absolute;
+    top: 5px;
+    width: 7px;
+}
+
+.pluaddfilelink:hover .pluaddfilelinkattach {
+    background: url("cmps.png") no-repeat scroll -36px 0;
+}
+
+.plufilecontainer
+{
+    overflow: auto;
+    clear:left;
+    padding: 2px 2px;
+}
+
+.plufileitem
+{
+    border-radius : 5px;
+    background-color : #e3eaf4;
+    float : left;
+    position : relative;
+    height: 30px;
+    width: 210px;
+    margin : 0 8px 8px 0;
+}
+
+.plufilelink
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: keep-all;
+    width: 200px;
+    padding: 0 0 0 5px;
+    display: block;
+    float: left;
+    margin: 2px 0;
+}
+
+.plufileitem:hover .plufilelink{
+    width: 160px;
+}
+
+.plureadonly .plufileitem:hover .plufilelink
+{
+    width: 200px;
+}
+
+.plufilelinktext
+{
+    line-height:25px;
+    cursor : pointer;
+}
+
+.plufilebtn
+{
+    border-radius : 8px;
+    line-height:22px;
+    padding: 0 5px;       	
+    display: none;
+    float: right;
+    color : #0f6099;
+    cursor : pointer;
+    margin: 4px 4px 4px 0;
+}
+
+.plufileitem:hover .plufilebtn
+{
+    display: block;
+}
+
+.plureadonly .plufileitem:hover .plufilebtn
+{
+    display: none;
+}
+
+.pluaddfilelink:hover,.plufilebtn:hover
+{
+    background-color: #0f6099;
+    color: #fff;
+    text-decoration : none;
+}
+
+.progressbarcontainer{
+    display: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    background-color: #cccccc;
+    padding: 0 30px;
+}
+
+.progressbar {
+    border-color: #95b8e7;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    position: relative;
+    height: 22px;
+    width: 100%;
+}
+
+.progressbartext {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+    color: #000000;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+    width:100%;
+}
+
+.progressbarvalue {
+    border-radius: 5px 0 0 5px;
+    overflow: hidden;
+    position: relative;
+    height: 22px;
+    line-height: 22px;
+    width: 100%;
+    background-color : #ffe48d;
+}
+
+.icon-dept{
+    background:url(../img/organise.gif) no-repeat;
+}
+.icon-role{
+    background:url(../img/role.gif) no-repeat;
+}

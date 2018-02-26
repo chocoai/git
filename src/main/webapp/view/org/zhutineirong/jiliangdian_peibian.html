@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>列表查询</title>
+
+<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/default/miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/bl-miniui/skin.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/res/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="#(g_path)/view/jlzz/index/assets/css/bl-miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/hnjl-index.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/font/iconfont.css" rel="stylesheet">
+
+<style type="text/css">
+body,html {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	/*overflow: hidden;*/
+}
+
+.lableright {
+	width: 80px;
+	text-align: right;
+}
+
+span.mini-tools-add {
+	width: 16px;
+	height: 16px;
+	background: url(add.gif) no-repeat;
+}
+
+span.mini-tools-edit {
+	width: 16px;
+	height: 16px;
+	background: url(edit.gif) no-repeat;
+}
+
+span.mini-tools-remove {
+	width: 16px;
+	height: 16px;
+	background: url(remove.gif) no-repeat;
+}
+</style>
+</head>
+
+<body>
+
+   
+
+    <div id="panel1" class="mini-panel" title="<i class='fa fa-chevron-down'></i>基本信息"
+		 style="width:100%;" showToolbar="true"
+		showCollapseButton="true" showFooter="true" allowResize="true"
+		collapseOnTitleClick="true" expanded="true">
+
+
+
+		<div id="editForm" style="padding:0px;  background: white;">
+			<table border="0" cellpadding="1" cellspacing="1"
+				style="table-layout:fixed; background:white; line-height:30px;">
+
+				<tr>
+					<td style="width:100px;text-align:right;">计量点标识</td>
+					<td style="width:300px;"><input #@bv("jdlbs") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+						
+					<td style="text-align:right;">上网电量计量方向标志<span
+						style="color: red">(*)</span>
+					</td> 
+					<td><input #@bv("swdljlfxbz")  width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">计量点名称<span
+						style="color: red">(*)</span>
+					</td>
+					<td style="width:300px;"><input  #@bv("jldmc") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">计量点类型<span style="color: red">(*)</span>
+					</td>
+					<td><input  #@bv("jldlx_mc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">供电单位编码<span
+						style="color: red">(*)</span>
+					</td>
+					<td style="width:300px;"><input  #@bv("gddwbm") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">所属厂站</td>
+					<td><input #@bv("bdzmc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">用电类别</td>
+					<td style="width:300px;"><input #@bv("ydlbdm_mc") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">所属终端</td>
+					<td><input id="zdmc" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">行业分类</td>
+					<td style="width:300px;"><input  #@bv("hyfldm_mc") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">电压等级</td>
+					<td><input  #@bv("dydjdm_mc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">分时计费标志</td>
+					<td style="width:300px;"><input #@bv("fsjfbz") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">计量点用途</td>
+					<td><input #@bv("jldytdm_mc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">计量点接线方式</td>
+					<td style="width:300px;"><input #@bv("jxfsdm_mc") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">计量点性质</td>
+					<td><input #@bv("jldxz") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">计量点用电容量</td>
+					<td style="width:300px;"><input   #@bv("ydrl") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">所属侧</td>
+					<td><input #@bv("sscdm_mc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">计量点位置</td>
+					<td style="width:300px;"><input  #@bv("jldwzmc") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">计量方式</td>
+					<td><input  #@bv("jldwzmc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+
+				<tr>
+					<td style="width:100px;text-align:right;">计量点类别</td>
+					<td style="width:300px;"><input  #@bv("jldlbdm_mc") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">计量装置分类</td>
+					<td><input  #@bv("jlzzfldm_mc") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">CT</td>
+					<td style="width:300px;"><input #@bv("ctbbdm") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">PT</td>
+					<td><input #@bv("ptbbdm") width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">综合倍率</td>
+					<td style="width:300px;"><input  #@bv("zhbl") width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">是否参与计算</td>
+					<td><input id="" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">所属变压器</td>
+					<td style="width:300px;"><input id="" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+	<div id="panel1" class="mini-panel" title="<i class='fa fa-chevron-down'></i>资产信息" style="width:100%;" showToolbar="true"
+		showCollapseButton="true" showFooter="true" allowResize="true"
+		collapseOnTitleClick="true" expanded="true">
+
+		<!-- -------------------------------------------------------------------- -->
+		<div id="editForm" style="padding:0px;  background: white;">
+			<table border="0" cellpadding="1" cellspacing="1"
+				style="table-layout:fixed; line-height:30px;">
+				<tr>
+					<td style="width:100px;text-align:right;">电能表资产标识</td>
+					<td style="width:300px;"><input id="dnbzcbs" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+					<td style="text-align:right;">资产编号</td>
+					<td><input id="zcbh" width="300px"  class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+
+				<tr>
+					<td style="width:100px;text-align:right;">出厂编号</td>
+					<td style="width:300px;"><input id="ccbh" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">制造厂家</td>
+					<td><input id="sccjbs" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">设备型号</td>
+					<td style="width:300px;"><input id="dnbxh_mc" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">通信地址</td>
+					<td><input id="txdz" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">通讯波特率</td>
+					<td style="width:300px;"><input id="btldm" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">额定电压</td>
+					<td><input id="eddy" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">精度等级</td>
+					<td style="width:300px;"><input id="" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">额定电流</td>
+					<td><input id="eddl" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">接线方式</td>
+					<td style="width:300px;"><input id="jxfsdm_mc" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">预付费装置类型</td>
+					<td><input id="yffzzlxdm_mc" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">分时功能</td>
+					<td style="width:300px;"><input id="fsbz" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">通信接口方式</td>
+					<td><input id="txjkfsdm_mc" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">拉闸功能</td>
+					<td style="width:300px;"><input id="lzbz" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">通信协议</td>
+					<td><input id="dnbgy_mc" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">冻结标志</td>
+					<td style="width:300px;"><input id="djbz" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">表计密码</td>
+					<td><input id="" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- -------------------------------------------------------------------- -->
+
+
+
+	<div id="panel1" class="mini-panel" title="<i class='fa fa-chevron-down'></i>通讯参数" style="width:100%;" showToolbar="true"
+		showCollapseButton="true" showFooter="true" allowResize="true"
+		collapseOnTitleClick="true" expanded="true">
+
+		<div id="editForm" style="padding:0px;  background: white;">
+			<table border="0" cellpadding="1" cellspacing="1"
+				style="table-layout:fixed; line-height:30px;">
+				<tr>
+					<td style="width:100px;text-align:right;">行电能表标识</td>
+					<td style="width:300px;"><input id="yxdnbbs" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">通讯方式</td>
+					<td><input id="txfsdm_mc" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+
+				<tr>
+					<td style="width:100px;text-align:right;">表规约</td>
+					<td style="width:300px;"><input id="dnbgy_mc" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">计量方向</td>
+					<td><input id="jlfx_mc" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+
+				<tr>
+					<td style="width:100px;text-align:right;">端内的测量点号</td>
+					<td style="width:300px;"><input id="cldlx_mc" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+	<!-- -------------------------------------------------------------------- -->
+
+
+	<div id="panel1" class="mini-panel" title="<i class='fa fa-chevron-down'></i>其他信息" style="width:100%;" showToolbar="true"
+		showCollapseButton="true" showFooter="true" allowResize="true"
+		collapseOnTitleClick="true" expanded="true">
+		<div id="editForm" style="padding:0px;  background: white;">
+			<table border="0" cellpadding="1" cellspacing="1"
+				style="table-layout:fixed; line-height:30px;">
+				<tr>
+					<td style="width:100px;text-align:right;">建档人</td>
+					<td style="width:300px;"><input id="" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">建档时间</td>
+					<td><input id="" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+
+				<tr>
+					<td style="width:100px;text-align:right;">变更人员</td>
+					<td style="width:300px;"><input id="" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">变更时间</td>
+					<td><input id="" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+				<tr>
+					<td style="width:100px;text-align:right;">安装地址</td>
+					<td style="width:300px;"><input id="" width="300px"
+						class="mini-textbox" showNullItem="false" textField="text"
+						valueField="id" readonly="true" /></td>
+
+					<td style="text-align:right;">备注</td>
+					<td><input id="" width="300px" class="mini-textbox"
+						showNullItem="false" textField="text" valueField="id"
+						readonly="true" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+  		function onSave(){
+  			var url = "#(g_path)/jiliangdian_peibian/save";
+  			var form = new mini.Form("#editForm");
+  			form.validate();
+            if (form.isValid() == false) return;
+            
+            var param = form.getData(true, false);
+            param["_editstate"] = "#(_editstate)";
+            param["_editguid"] = "#(_editguid)";
+            
+  			getJson(url,param,true,function(re){
+  				if(re.isOk){
+  					MsgBox.showSuccessTips("保存成功！");
+  					CloseWindow("ok");
+  				}
+  			});
+  		}
+  		
+  		function onClose(){
+  			CloseWindow("cancel");
+  		}
+  		
+  		function CloseWindow(action) {
+		    if (window.CloseOwnerWindow)
+		        return window.CloseOwnerWindow(action);
+		    else
+		        window.close();
+		}
+  	</script>

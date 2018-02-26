@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<title>编辑流程参与者</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+    <style type="text/css">
+    fieldset
+    {
+        border:solid 1px #aaa;
+    }        
+    .hideFieldset
+    {
+        border-left:0;
+        border-right:0;
+        border-bottom:0;
+    }
+    .hideFieldset .fieldset-body
+    {
+        display:none;
+    }
+    
+    .fieldset-body table{
+    	width: 100%;
+    	table-layout:fixed;
+    }
+    
+    .fieldset-body .editlabel{
+    	width: 100px !important;
+    	text-align: right;
+    }
+    
+    .mini-radiobuttonlist{
+    	
+    	display: inline-block;
+    	float: left;
+    }
+    
+    .mini-radiobuttonlist .mini-list-inner{
+    	margin-top:3px;
+    	margin-left: 5px;
+    }
+    </style>
+<body>
+  	<div class="op_tool">
+  		<div class="pull_right">
+  			<a class="mini-button" iconCls="icon-ok" onclick="onOk();">确定</a>
+  			<a class="mini-button" iconCls="icon-close" onclick="onClose();">关闭</a> 
+        </div>    
+  	</div>
+  	<div id="editForm2">
+  		<fieldset id="fd1" style="width:730px;">
+	        <legend><label><input name="chktype" type="radio" id="chk1" value="参与者列表" onclick="toggleFieldSet()" hideFocus/>参与者列表</label></legend>
+	        <div id="form1" class="fieldset-body">
+	            <div style="padding-bottom: 3px">
+			        	<a id="btnAdd" class="mini-button" iconCls="icon-add" onclick="onAddActor();">添加</a>
+			        	<a id="btnDel" class="mini-button" iconCls="icon-remove" onclick="onDelActor();">删除</a>
+		        	</div>
+		        	<div id="datagrid1" class="mini-datagrid" style="height:150px; width: 100%" fitColumns="false"
+			           idField="id" showPager="false";
+			           allowCellEdit="false" multiSelect="false"
+			       >
+			           <div property="columns">
+			               <div type="indexcolumn" ></div>
+			               <div field="actortype" width="150px" headerAlign="center" align="center" allowSort="false">参与者类型 
+			               </div>
+			               <div field="name" width="150px" headerAlign="center" align="center" allowSort="false">参与者
+			               </div>               
+			           </div>
+			       </div>
+			       <div style="clear: both;">
+			       	<span style="float: left; display: inline-block; line-height: 28px; padding-left: 10px">参与者过滤：</span> 
+			       	<div id="cbfilter" class="mini-radiobuttonlist" repeatLayout="table" style="width: 350px"
+					    textField="text" valueField="id" value="" 
+					    data='[{"id":"","text":"无"},{"id":"本单位","text":"本单位"},{"id":"本部门","text":"本部门"},{"id":"本机构","text":"本机构"}]' >
+			       </div>
+	        </div>
+	    </fieldset>
+	    
+	    <fieldset id="fd2" style="width:730px;">
+	        <legend><label><input name="chktype" type="radio" id="chk2" value="流程启动者" onclick="toggleFieldSet()" hideFocus/>流程启动者</label></legend>
+	        <div id="form2" class="fieldset-body">
+	        	<br />
+	        </div>
+	    </fieldset>
+	    
+	    <fieldset id="fd3" style="width:730px;">
+	    	
+	        <legend><label><input name="chktype" type="radio" id="chk3" value="节点处理人" onclick="toggleFieldSet()" hideFocus/>节点处理人</label></legend>
+	        <div id="form3" class="fieldset-body">
+	            <table border="0" cellpadding="1" cellspacing="2">
+				    <tr>
+				        <td class="editlabel">
+				        	流程节点：
+				        </td>
+				        <td style="width:100%">
+				        	<input id="cb_flownode" class="mini-combobox" style="width: 100%" value=""/>
+				        </td>
+				    </tr>
+				</table>
+	        </div>
+	    </fieldset>
+
+	    
+	    <fieldset id="fd4" style="width:730px;">
+	        <legend><label><input name="chktype" type="radio" id="chk4" value="流程参数" onclick="toggleFieldSet()" hideFocus/>流程参数</label></legend>
+	        <div id="form4" class="fieldset-body">
+	            <table border="0" cellpadding="1" cellspacing="2" >
+				    <tr>
+				        <td class="editlabel">
+				        	流程参数：
+				        </td>
+				        <td style="width:100%">
+				        	<input id="cb_param" class="mini-combobox" style="width: 100%" value=""/>
+				        </td>
+				    </tr>
+				</table>
+	        </div>
+	    </fieldset>
+	    
+	    <fieldset id="fd5" style="width:730px;">
+	        <legend><label><input name="chktype" type="radio" id="chk5" value="自定义" onclick="toggleFieldSet()" hideFocus/>自定义</label></legend>
+	        <div id="form5" class="fieldset-body">
+	            <table border="0" cellpadding="1" cellspacing="2">
+				    <tr>
+				        <td class="editlabel">
+				        	实现类：
+				        </td>
+				        <td style="width:100%">
+				        	<input id="txt_class" class="mini-textbox" style="width: 100%" value=""/>
+				        </td>
+				    </tr>
+				</table>
+	        </div>
+	    </fieldset>
+	    
+  	</div>
+
+  	
+  	<script type="text/javascript">
+  		mini.parse();
+  		/* 参与者JSON数据说明
+		{
+			type:"参与者列表",//参与者列表；流程启动者；节点处理人；流程参数；自定义
+			data:[{id:"参与者id",name:"参与者",actortype:"参与者类型"}],//actortype，人员；角色；部门
+			filter:"无"
+		}
+		
+		{
+			type:"流程启动者"
+		}
+		{
+			type:"节点处理人",
+			data:"节点id"
+		}
+		{
+			type:"流程参数",
+			data:"参数编码"
+		}
+		{
+			type:"自定义",
+			data:"参数编码"
+		} */
+		var form1 = new mini.Form("#form1");
+		var form2 = new mini.Form("#form2");
+		var form3 = new mini.Form("#form3");
+		var form4 = new mini.Form("#form4");
+		var form5 = new mini.Form("#form5");
+		
+  		function init(jsonData,nodelist,paramlist){
+  			if(jsonData){
+  				$("input[name='chktype'][value=" +jsonData.type+ "]").attr("checked",true);
+  			}
+  			
+  			var nodeDatas = [];
+  			for(var i=0; i < nodelist.length; i++){
+  				if(nodelist[i].__state=="del")
+  					continue;
+  				nodeDatas.push({"id":nodelist[i].id,"text":nodelist[i].flownodename});
+  			}
+  			mini.get("cb_flownode").setData(nodeDatas);
+  			
+  			var paramDatas = [];
+  			for(var i=0; i < paramlist.length; i++){
+  				if(paramlist[i].__state=="del")
+  					continue;
+  				paramDatas.push({"id":paramlist[i].parambm,"text":paramlist[i].paramname});
+  			}
+  			mini.get("cb_param").setData(paramDatas);
+  			
+  			var type = jsonData.type;
+  			if(type=="节点处理人"){
+  				mini.get("cb_flownode").setValue(jsonData.data);
+  			}
+  			else if(type=="流程参数"){
+  				mini.get("cb_param").setValue(jsonData.data);
+  			}
+  			else if(type=="自定义"){
+  				mini.get("txt_class").setValue(jsonData.data);
+  			}
+  			else if(type=="参与者列表"){
+  				var datas = mini.clone(jsonData.data);
+  				refreshGrid(datas);
+  				mini.get("cbfilter").setValue(jsonData.filter);
+  			}
+  			
+  			toggleFieldSet();
+  		}
+  		
+  		function getJsonData(){
+  			var type = $("input[name='chktype']:checked").val(); 
+
+  			var jsonData = {
+  				type : type
+  			}
+  			
+  			if(type=="节点处理人"){
+  				jsonData.data = mini.get("cb_flownode").getValue();
+  			}
+  			else if(type=="流程参数"){
+  				jsonData.data = mini.get("cb_param").getValue();
+  			}
+  			else if(type=="自定义"){
+  				jsonData.data = mini.get("txt_class").getValue();
+  			}
+  			else if(type=="参与者列表"){
+  				jsonData.data = window.actorList;
+  				jsonData.filter = mini.get("cbfilter").getValue();
+  				
+  			}
+  			
+  			return jsonData;
+  		}
+  		
+  		function onOk(){
+  			CloseWindow("ok");
+  		}
+  		
+  		function onClose(){
+  			CloseWindow("cancel");
+  		}
+  		
+  		function CloseWindow(action) {
+		    if (window.CloseOwnerWindow)
+		        return window.CloseOwnerWindow(action);
+		    else
+		        window.close();
+		}	
+        
+        function onAddActor(){
+        	var url = window.g_path + "/sys/flow/edit_actorjson_edit";
+		   		MsgBox.openWin(url,"添加流程参与者","350px","500px",function(win){
+		   			
+		   		},function(action,win){
+		   			if(action == "ok"){
+		   				var data = win.getJsonData();
+		   				var newData = mini.clone(data);
+		   				refreshGrid(newData);
+		   			}
+		   		});
+        }
+        
+        function refreshGrid(data){
+        	if(window.actorList){
+        		var newDatas = [];
+        		for(var i=0; i < data.length; i++){
+        			var isHas = false;
+        			for(var j=0; j < window.actorList.length; j++){
+        				if(window.actorList[j].id == data[i].id){
+        					isHas = true;
+        					break;
+        				}
+        			}
+        			
+        			if(!isHas){
+        				newDatas.push(data[i]);
+        			}
+        		}
+        		
+        		for(var i=0; i < newDatas.length; i++){
+        			window.actorList.push(newDatas[i]);
+        		}
+        	}
+        	else{
+        		window.actorList = data;
+        	}
+        	mini.get("datagrid1").setData(window.actorList);
+        }
+        
+        function onDelActor(){
+        	var grid = mini.get("datagrid1");
+        	var rows = grid.getSelecteds();
+		
+			if(rows.length < 1){
+				MsgBox.showWarningTips("请先选择删除数据！");
+				return;
+			}
+			
+			
+			MsgBox.confirm("确定要删除吗？", function(b){
+				grid.removeRows(rows);
+				for(var i=0; i < rows.length; i++){
+					window.actorList.removeByValue(rows[i]);
+				}
+				
+			});
+        }
+        
+        function toggleFieldSet(){
+        	var type = $("input[name='chktype']:checked").val(); 
+        	
+        	form1.setEnabled(false);
+        	form2.setEnabled(false);
+        	form3.setEnabled(false);
+        	form4.setEnabled(false);
+        	form5.setEnabled(false);
+        	mini.get("btnAdd").setEnabled(false);
+        	mini.get("btnDel").setEnabled(false);
+        	
+			if(type=="参与者列表"){
+  				form1.setEnabled(true);
+  				mini.get("btnAdd").setEnabled(true);
+        		mini.get("btnDel").setEnabled(true);
+  			}
+  			else if(type=="节点处理人"){
+  				form3.setEnabled(true);
+  			}
+  			else if(type=="流程参数"){
+  				form4.setEnabled(true);
+  			}
+  			else if(type=="自定义"){
+  				form5.setEnabled(true);
+  			}
+        }
+        
+        Array.prototype.removeByValue = function(val) {
+           for(var i=0; i<this.length; i++) {
+                if(this[i] == val) {       
+                	this.splice(i, 1);       
+                	break;     
+                }   
+        	} 
+       	} 
+  	</script>
+</body>
+</html>

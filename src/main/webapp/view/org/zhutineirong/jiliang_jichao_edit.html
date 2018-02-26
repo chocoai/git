@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jiliang-jichao.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <script type="text/javascript" src="#(g_path)/js/miniui/boot.js"></script>
+	<link rel="stylesheet" href="#(g_path)/js/miniui/miniui/themes/blue/skin.css" type="text/css"></link>
+	
+	<style>
+		.input-item{
+			width:200px;
+		}
+	</style>
+
+  </head>
+  
+  <body>
+    <div class="mini-panel" title="基本信息" iconCls="icon-add" style="width:750px;height:580px;" 
+    showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" expanded="true">
+		<table cellpadding="5" cellspacing="5">
+			<tr>
+				<td style="text-align:right;">计量点标识<font style="color:red;">(*)</font></td>
+				<td><input #@bv("jldbh") type="text" class="mini-textbox input-item" readonly="readonly" /></td>
+				<td style="text-align:right;">上网电量计量方向标志<font style="color:red;">(*)</font></td>
+				<td><input #@bv("swdljlfxbz") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">计量点名称<font style="color:red;">(*)</font></td>
+				<td><input #@bv("jldmc") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">计量点类型<font style="color:red;">(*)</font></td>
+				<td><input #@bv("jldlx") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">供电单位编码<font style="color:red;">(*)</font></td>
+				<td><input #@bv("gddwbm") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">所属厂站</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">用电类别</td>
+				<td><input #@bv("YDLBDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">所属用户</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">行业分类</td>
+				<td><input #@bv("HYFLDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">计量点用途</td>
+				<td><input #@bv("JLDYTDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">分时计费标志</td>
+				<td><input #@bv("FSJFBZ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">电压等级</td>
+				<td><input #@bv("JLDYDJDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">计量点接线方式</td>
+				<td><input #@bv("JXFSDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">所属侧</td>
+				<td><input #@bv("SSCDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">计量点用电容量</td>
+				<td><input #@bv("YDRL") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">计量点性质</td>
+				<td><input #@bv("JLDXZ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			    </tr>
+			<tr>
+				<td style="text-align:right;">计量点位置</td>
+				<td><input #@bv("JLDWZDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">计量方式</td>
+				<td><input #@bv("JLFSDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">计量点类别</td>
+				<td><input #@bv("JLDLBDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">计量装置分类</td>
+				<td><input #@bv("JLZZFLDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">CT</td> 
+				<td><input #@bv("CTBB") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">PT</td>
+				<td><input #@bv("PTBB") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">综合倍率</td>
+				<td><input #@bv("ZHBL") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">是否参与计算</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr> 
+		</table>
+	</div>
+	<div class="mini-panel" title="资产信息" iconCls="icon-add" style="width:750px;height:450px;" 
+	showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" expanded="true">
+		<table cellpadding="5" cellspacing="5">
+			<tr>
+				<td style="text-align:right;">电能表资产标识</td>
+				<td><input #@bv("DNBZCBS") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">资产编号</td>
+				<td><input #@bv("ZCBH") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">出厂编号</td>
+				<td><input #@bv("CCBH") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">制造厂家</td>
+				<td><input #@bv("SCCJBS") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">设备型号</td>
+				<td><input #@bv("SBXHDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">通信地址</td>
+				<td><input #@bv("TXDZ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">通讯波特率</td>
+				<td><input #@bv("BTLDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">额定电压</td>
+				<td><input #@bv("EDDY") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">精度等级</td>
+				<td><input #@bv("JDDJDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">额定电流</td>
+				<td><input #@bv("EDDL") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">接线方式</td>
+				<td><input #@bv("JXFSDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">预付费装置类型</td>
+				<td><input #@bv("YFFZHLXDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">分时功能</td>
+				<td><input #@bv("FSBZ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">通信接口方式</td>
+				<td><input #@bv("TXJKFSDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">拉闸功能</td>
+				<td><input #@bv("LZBZ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">通信协议</td>
+				<td><input #@bv("TXXYDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">冻结标志</td>
+				<td><input #@bv("DJBZ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">表计密码</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+		</table>
+	</div>
+	<div class="mini-panel" title="通讯参数" iconCls="icon-add" style="width:750px;height:200px;"
+	 showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" expanded="true">
+		<table cellpadding="5" cellspacing="5">
+			<tr>
+				<td style="text-align:right;">运行电能表标识</td>
+				<td><input #@bv("YXDNBBS") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">通讯方式</td>
+				<td><input #@bv("TXFSDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">表规约</td>
+				<td><input #@bv("TXGYDM") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">计量方向</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">在终端内的测量点号</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+		</table>
+	</div>
+	<div class="mini-panel" title="其他信息" iconCls="icon-add" style="width:750px;height:200px;"
+	 showToolbar="true" showCollapseButton="true" showFooter="true" allowResize="true" collapseOnTitleClick="true" expanded="true">
+		<table cellpadding="5" cellspacing="5">
+			<tr>
+				<td style="text-align:right;">建档人</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">建档时间</td>
+				<td><input #@bv("CJSJ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">变更人员</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">变更时间</td>
+				<td><input #@bv("CZSJ") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">安装地址</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+				<td style="text-align:right;">备注</td>
+				<td><input #@bv("") type="text" class="mini-textbox input-item" readonly="readonly"/></td>
+			</tr>
+		</table>
+	</div>
+  </body>
+</html>

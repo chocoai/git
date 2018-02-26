@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>列表</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+            <link href="#(g_path)/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+                <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+                <link href="#(g_path)/view/jlzz/index/treeicon.css"  	rel="stylesheet" type="text/css" >
+                
+           
+
+                    <style type="text/css">
+                        html,body{
+                            width: 100%;
+                            height: 100%;
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .top{
+                            /*background: yellow;*/
+                            font-size: 12px;
+                            width: 584px;
+                            padding: 5px 8px;
+                        }
+                        .inp_cp{
+                            margin-left: 0px;
+
+                        }
+                        .input_query{
+                            width: 122px;
+                            border: 1px solid #CCCCCC;
+                            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+                            transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+                            border-radius: 3px;
+                            color: rgb(170, 170, 170);
+                        }
+                        .btn_query{
+                            width: 45px;
+                            /*margin-left: -46px;*/
+                            border: 1px solid #356da8;
+                            border-radius: 3px 3px 3px 3px;
+                            background: #e4f1fb;
+
+                        }
+                        .toolbar_div{
+                            margin-top: 10px;
+                            border-top: 1px solid #dddddd;
+                            width: 289px;
+                        }
+
+                    </style>
+
+                    </head>
+                    <body>
+
+                        <div class="top" id="radioForm">
+                            <table>
+                                <tr style="height: 28px;">
+                                    <td style="width: 52px;">对象类型</td>
+                                    <td>
+                                        <div>
+                                            <a class="mini-menubutton " menu="#popupMenu" style="width: 122px;height: 21px;"><span id="span_text">采集点</span></a>
+
+                                            <ul id="popupMenu" class="mini-menu" style="display:none;">
+                                                <li  onclick="onItemClick('部门')">部门</li>             
+                                                <li  onclick="onItemClick('厂站')">厂站</li>
+                                                <li  onclick="onItemClick('线路')">线路</li>
+                                                <li  onclick="onItemClick('台区')">台区</li>
+                                                <li  onclick="onItemClick('变压器')">变压器</li>
+                                                <li  onclick="onItemClick('用户')">用户</li>
+                                                <li  onclick="onItemClick('终端')">终端</li>
+                                                <li  onclick="onItemClick('采集器')">采集器</li>
+                                                <li  onclick="onItemClick('计量点')">计量点</li>
+                                                <li  onclick="onItemClick('SIM卡')">SIM卡</li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>查询条件</td>
+                                    <td><input type="text" name="queryText" id="queryText" class="input_query mini-textbox" placeholder="请输入名称或简拼!"></input>
+                                        <input type="button" name="" value="查询" class="btn_query" onclick="zdQuery();" id="query"> </input>
+                                    </td>
+                                    <td></td>
+                                </tr>
+
+                                <tr  class="radio_tr" value="终端" style="display:none;">
+                                    <td>终端类型</td>
+                                    <td>
+                                        <div class="mini-radiobuttonlist radio_div" repeatItems="6" repeatLayout="" repeatDirection="Horizontal"
+                                             textField="text"  valueField="id" value="" style="width: 100%;"  
+                                             url="./ZhongDuanDNL/getZdlxRadio" >
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr  class="radio_tr" value="台区" style="display:none">
+                                    <td>台区类型</td>
+                                    <td>
+                                        <div class="mini-radiobuttonlist radio_div" repeatItems="6" repeatLayout="" repeatDirection="Horizontal"
+                                             textField="text"  valueField="id" value="" style="width: 100%;"  
+                                             url="#(g_path)/taiqu/getTqlxRadio" >
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr  class="radio_tr" value="线路" style="display:none">
+                                    <td>线路类型</td>
+                                    <td>
+                                        <div class="mini-radiobuttonlist radio_div" repeatItems="6" repeatLayout="" repeatDirection="Horizontal"
+                                             textField="text"  valueField="id" value="" style="width: 100%;"  
+                                             url="#(g_path)/xianlu/getXllxRadio" >
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr class="radio_tr" value="厂站" style="display:none">
+                                    <td>厂站类型</td>
+                                    <td>
+                                        <div class="mini-radiobuttonlist radio_div" repeatItems="6" repeatLayout="" repeatDirection="Horizontal"
+                                             textField="text"  valueField="id" value="" style="width: 100%;"  
+                                             url="#(g_path)/biandianzhan/getCzlxRadio" >
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                        <div id="form_search" class="mini-fit"><iframe src="#(g_path)/hh/CaiJiDian/caijidian"  width="100%" style="height: 100%"  frameborder="0" scrolling="auto"></iframe></div>
+
+
+
+                    </body>
+
+
+                    <script type="text/javascript">
+                        var winWidth = 925;
+                        var winHeight = 450;
+                        mini.parse();
+                        function zdQuery() {
+                            var text = $("#span_text").text();
+                            var radio = $("#rbl").find("input").last();
+                            
+                            var radioVal = "";
+                            if(radio.length != 0){
+                                radioVal = radio[0].value;
+                            }
+                            
+                            var form = new mini.Form("#radioForm");
+                            var data = form.getData(true, false);
+                            var ques = data.queryText;
+                            urls(text, ques, radioVal);
+                        }
+                        $(function () {
+                            onItemClick("采集器");
+                        });
+
+                        function onItemClick(e) {
+                            $(".radio_tr").css("display", "none");
+                            $("#span_text").html(e);
+                            var url = "#(g_path)/CaiJiDian/caijidian";
+
+                            var trs = $(".radio_tr");
+                            for (var i = 0; i < trs.length; i++) {
+                                if ($(trs[i]).attr("value") == e) {
+                                    $(trs[i]).css("display", "table-row");
+                                    $(trs[i]).find(".radio_div").attr("id", "rbl");
+                                } else {
+                                    $(trs[i]).find(".radio_div").removeAttr("id");
+                                }
+                            }
+
+                            urls(e);
+                        }
+
+                        function urls(e, queryText, radioValue) {
+                            if (e == '线路') {
+                                var url = "<iframe width='100%;' height='100%;' frameborder='0' scrolling='auto' src=#(g_path)/xianlu/xianlu_list";
+                            } else if (e == '台区') {
+                                var url = "<iframe width='100%;' height='100%;' frameborder='0' scrolling='auto' src=#(g_path)/taiqu/taiqu_list";
+                            } else if (e == '计量点') {
+                                var url = "<iframe width='100%;' height='100%;' frameborder='0' scrolling='auto' src=#(g_path)/jiliangdian_peibian/jiliangdian_list";
+                            } else if (e == 'SIM卡') {
+                                var url = "<iframe width='100%;' height='100%;' frameborder='0' scrolling='auto' src=#(g_path)/simka/sim_list";
+                            } else if (e == '部门') {
+                                var url = "<iframe style='width:100%; height:100%;' frameborder='0' src=#(g_path)/bumen_zhuti/bumen";
+                            } else if (e == '厂站') {
+                                var url = "<iframe style='width:100%; height:100%;' frameborder='0' src=#(g_path)/biandianzhan/changzhan";
+                            } else if (e == '变压器') {
+                                var url = "<iframe style='width:100%; height:100%;' frameborder='0' src=#(g_path)/bianyaqi";
+                            } else if (e == '用户') {
+                                var url = "<iframe style='width:100%; height:100%;' frameborder='0' src=#(g_path)/YongHu/index";
+                            } else if (e == '采集器') {
+                                var url = "<iframe style='width:100%; height:100%;' frameborder='0' src=#(g_path)/CaiJiDian/caijidian";
+                            } else if (e == '终端') {
+                                var url = "<iframe style='width:100%; height:100%;' frameborder='0' src=#(g_path)/ZhongDuanDNL/first";
+                            }
+
+                            if ("undefined" != typeof queryText) {
+                                url = url + "?questionText=" + queryText + "&radioValue=" + radioValue;
+                            }
+                            url += "></iframe>";
+                            $("#form_search").html(url);
+                        }
+                    </script>
+
+
+                    </html>

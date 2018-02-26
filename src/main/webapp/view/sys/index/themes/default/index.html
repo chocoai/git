@@ -1,0 +1,600 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>#(title)</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="#(g_path)/css/font-awesome-4.7.0/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css">
+    <link href="#(g_path)/view/sys/index/themes/default/css/iconfont/iconfont.css"
+    	rel="stylesheet" type="text/css" >
+	<script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+	<script src="#(g_path)/js/sys/inner/pwdcheckpolicy.js" type="text/javascript"></script>
+	<link href="#(g_path)/view/sys/index/themes/default/index.css"
+    	rel="stylesheet" type="text/css" >
+    <link href="#(g_path)/js/custom-scrollbar/jquery.mCustomScrollbar.min.css"
+    	rel="stylesheet" type="text/css" >	
+    <script src="#(g_path)/js/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+	<style type="text/css">
+	body,html {
+		width: 100%;
+		height: 100%;
+		padding: 0px;
+		margin: 0px;
+		overflow: hidden;
+		font-family: 微软雅黑;
+	}
+	.mini-splitter{
+		font-family: 微软雅黑;
+	}
+	.mCSB_inside>.mCSB_container {
+	    margin-right: 0px;
+	}
+	
+	.leftbar .level1menu-item{
+		padding-left: 20px;
+	}
+	
+	.leftbar .level1menu_2{
+		padding: 8px 2px 8px 18px;
+	}
+	
+	.mini-tree-nodeshow
+	{
+	    
+	    border-color:#74b2e2;    
+	    color:White; 
+	}
+	
+	.mini-tree-node-hover .mini-tree-nodeshow
+	{
+	    background: none;
+		border-color:#74b2e2;  
+	}
+	.mini-tree-selectedNode .mini-tree-nodeshow
+	{
+	    background:#3baae3;
+	    border-color:#74b2e2;    
+	    color:White; 
+	}
+
+	.leftbar .mini-panel-body
+	{
+	    background-color: #34495E;
+	}
+    </style>
+</head>
+<body>
+	<div class="mini-splitter" style="width: 100%; height: 100%;" borderStyle="border: 0;" allowResize="false" handlerSize="0">
+	  	<div size="220px" showCollapseButton="false">
+		    <div class="leftbar">
+		    	<div class="dwlogo">
+		    		<i class="iconfont icon-nanwanglogoda"></i>
+		    	</div>
+		    	<div id="level1menucontainer" class="mini-fit mCustomScrollbar light" data-mcs-theme="minimal-dark" >
+		    		<ul id="level1menu">
+			    		<li class="level1menu-item" id="menuHome" onclick="clickHomeMenu(this)"><i class="iconfont icon-shouye"></i><span>首页</span><i class="arrow fa fa-angle-right" aria-hidden="true"></i></li>
+			    	</ul>
+		    	</div>
+		    </div>
+	    </div>
+		<div class="rightcenter">
+			<div>
+				<div class="header">
+					<i style="display: inline-block; font-size: 13px; padding: 15px" class="fa fa-bars" aria-hidden="true"></i>
+					<span class="header-txt">#(title)</span>
+					<div class="header-right">
+						<ul class="header-menu">
+							<li title="通知">
+								<i class="fa fa-bell"></i>
+								<span class="header-menu-mark color-orange">0</span>
+							</li>
+							<!-- <li title="短消息">
+								<i class="fa fa-envelope"></i>
+								<span class="header-menu-mark color-red">1</span>
+							</li> -->
+							<li title="任务" onclick="onTaskClick()">
+								<i class="fa fa-tasks"></i>
+								<span id="txtTaskCount" class="header-menu-mark color-green">0</span>
+							</li>
+							<li class="header-menu-user" onclick="showUserBar()">
+								<i class="fa fa-user-circle"></i>
+								<span class="header-menu-user-txt">#(g_user.username)(#(g_user.deptname))</span>
+								<i class="fa fa-caret-down"></i>
+							</li>
+						</ul>
+						<ul class="user-menu">
+							<li class="user-menu-item">
+								<i class="fa fa-user"></i>
+								<span>个人中心</span>
+							</li>
+							<li class="user-menu-item" onclick="onShowChangePwdWin()">
+								<i class="fa fa-edit"></i>
+								<span>修改密码</span>
+							</li>
+							<li class="user-menu-item user-menu-item-split" onclick="onCloseClick()">
+								<i class="fa fa-power-off"></i>
+								<span>切换用户</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="mini-fit" id="mainFit" style="padding: 0px;">
+				<div id="mainTabs" class="mini-tabs" activeIndex="0" style="width:100%;height:100%; padding: 0px"      
+                     plain="false" onactivechanged="onTabsActiveChanged" contextMenu="#tabsMenu">
+                    <div name="first" title="首页" url="#(g_path)#(homepage)">
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+	
+	<ul id="tabsMenu" class="mini-contextmenu" onbeforeopen="onBeforeOpen">  
+		<li iconCls="icon-reload" onclick="refreshTab">刷新</li>     
+        <li class="separator"></li>    
+        <li iconCls="icon-close" onclick="closeTab">关闭</li>                
+	    <li iconCls="icon-close" onclick="closeAllButFirst">关闭其他</li>
+	    <li iconCls="icon-close" onclick="closeAll">关闭所有</li>
+    </ul>
+    
+	<div id="winPassword" class="mini-window" title="修改密码" style="width:350px;height:210px;" 
+	    showMaxButton="false" showCollapseButton="false" showShadow="true"
+	    showToolbar="false" showFooter="true" showModal="true" allowResize="false" allowDrag="true"
+	    >
+	    <div property="footer" style="text-align:right;padding:8px;padding-right:60px;">
+	        <a class="mini-button" iconCls="icon-ok" onclick="onChangePwdWinOkClick">修改密码</a>
+	        &nbsp;&nbsp;<a class="mini-button" iconCls="icon-cancel" onclick="onChangePwdWinCancelClick">取消</a>
+	    </div>
+	    <div style="padding: 10px 0px;">
+	    	<table border="0" cellpadding="1" cellspacing="2" style="width:100%; font-size: 13px;">
+			    <tr>
+			        <td style="width:30%; text-align: right;">原&nbsp;密&nbsp;码：</td>
+			        <td style="width:70%">
+			            <input name="cp_old" id="cp_old" class="mini-password" required="true" style="width:80%" />
+			        </td>
+			    </tr>
+			    <tr>
+			        <td style="text-align: right;">新&nbsp;密&nbsp;码：</td>
+			        <td >
+			            <input name="cp_new1" id="cp_new1" class="mini-password" required="true" style="width:80%"  />
+			        </td>
+			    </tr>
+			    <tr>
+			        <td style="text-align: right;">确认密码：</td>
+			        <td >
+			            <input name="cp_new2" id="cp_new2" class="mini-password" required="true" onvalidation="onNewPwdValidation" style="width:80%"  />
+			        </td>
+			    </tr>
+			</table>
+	    </div>
+	</div>
+	
+    <script type="text/javascript">
+    	mini.parse();
+    	
+    	var tabs = mini.get("mainTabs");
+    	var hideUserBarTimer = null;
+    	$(".header-menu-user").hover(function(){
+    		window.clearTimeout(hideUserBarTimer);
+    	},function(){
+    		window.clearTimeout(hideUserBarTimer);
+    		hideUserBarTimer = window.setTimeout(hideUserBar, 500);
+    	});
+    	$(".user-menu").hover(function(){
+    		window.clearTimeout(hideUserBarTimer);
+    	},function(){
+    		window.clearTimeout(hideUserBarTimer);
+    		hideUserBarTimer = window.setTimeout(hideUserBar, 500);
+    	});
+    	
+    	clickHomeMenu($("#menuHome").get(0));
+    	
+		$(function(){
+			$("#level1menucontainer").mCustomScrollbar({
+				autoHideScrollbar:true
+			});
+				
+			var url = "#(g_path)/getOutLookTree";
+			getJson(url,null,true,function(list){
+				window.MenuNodes = list;
+				createlevel1menu();
+			});
+		});
+		
+		function createlevel1menu(){
+			var level1menuJq = $("#level1menu");
+			var chds = getChildMenuNodes("-1");
+			var treeids = [];
+			for(var i=0; i < chds.length; i++){
+				var node = chds[i];
+				var htmlJq = $("<li id=\"node_" +node.id+ "\" class=\"level1menu-item\"><i class=\"" +node.iconcls+ "\"></i><span>" +node.text+ "</span><i class=\"arrow fa fa-angle-right\" aria-hidden=\"true\"></i></li>");
+				htmlJq.data("myData",node).click(function(){
+					clickLevel1Menu(this);
+				});
+				level1menuJq.append(htmlJq);
+				
+				var l2chds = [];
+				getChildMenuNodes2(l2chds,node.id);
+				if(l2chds.length > 0){
+					var htmlChdJq = $("<div id=\"chd_" +node.id+ "\"  class=\"level1menu-child-item\"><div class=\"level1menu_2\"></div></div>");
+					var htmlChdJq_ul = htmlChdJq.find(".level1menu_2");
+					
+					var treeid = "tree_data_" + node.id;
+					treeids.push(treeid);
+					window[treeid] = l2chds;
+					var treeJq = $("<ul id=\"" +treeid+ "\" class=\"mini-tree\" style=\"width:100%;\" expandOnLoad=\"true\" showExpandButtons=\"false\" expandOnNodeClick=\"true\" showTreeLines=\"false\" showTreeIcon=\"true\" textField=\"text\" pidField=\"pid\" onbeforenodeselect=\"onTreeBeforenodeselect\"></ul>");
+					htmlChdJq_ul.append(treeJq);
+					level1menuJq.append(htmlChdJq);
+				}
+			}
+			
+			mini.parse();
+			window.LeftTrees = [];
+			for(var i=0; i < treeids.length; i++){
+				var treeid = treeids[i];
+				var miniTree = mini.get(treeid);
+				miniTree.on("beforenodeselect")
+	   			miniTree.loadList(window[treeid], "id", "pid");
+	   			
+	   			window.LeftTrees.push(miniTree);
+			}
+		}
+		
+		function onTreeBeforenodeselect(e){
+			if(e.isLeaf){
+				showTab(e.node,true);
+			}
+			else{
+				e.cancel = true;
+			}
+		}
+		
+		function clickHomeMenu(dom){
+			var liJq = $(dom);
+			var tab = tabs.getTab('first');
+			$(".level1menu-item").removeClass("hover");
+			$(".level1menu-child-item").hide();
+			$(".arrow").removeClass("fa-angle-down");
+			if (tab) {
+				tabs.activeTab(tab);//选中标签页
+				tabs.reloadTab(tab);
+			} else {
+				var tab = {};
+				tab.name = "first";
+				tab.title = "首页";
+				tab.showCloseButton = false;//是否显示关闭按钮
+				tab.url = "#(g_path)#(homepage)"
+				tabs.addTab(tab);//添加标签页
+				tabs.activeTab(tab);//选中标签页
+			}	
+		}
+		
+		function clickLevel1Menu(dom){
+			var liJq = $(dom);
+			var node = liJq.data("myData");
+			var chdJq = $("#chd_" +node.id);
+			var ishidden = chdJq.is(":hidden")
+			$(".level1menu-item").removeClass("hover");
+			$(".level1menu-child-item").hide();
+			$(".arrow").removeClass("fa-angle-down");
+			if(chdJq.size() > 0){
+				if(ishidden){
+					$("#node_" +node.id +" .arrow").addClass("fa-angle-down");
+					liJq.addClass("hover");
+					//mini.get("tree_data_" + node.id).selectNode(null);
+					chdJq.show(300);
+				}
+				else{
+					chdJq.hide(300);
+				}
+			}
+			else{
+				showTab(node);
+			}
+		}
+
+		function activelevel1menu(liJq,callbak){
+			$("#level1menu .level1menu-item").removeClass("active");
+			liJq.addClass("active");
+			if(callbak)
+				callbak();
+		}
+		
+		function getChildMenuNodes(pid){
+			var list = [];
+			for(var i=0; i < window.MenuNodes.length; i++){
+				var node = window.MenuNodes[i];
+				if(node.pid == pid){
+					list.push(node);
+				}
+			}
+			return list;
+		}
+		
+		function getChildMenuNodes2(list,pid){
+			for(var i=0; i < window.MenuNodes.length; i++){
+				var node = window.MenuNodes[i];
+				if(node.pid == pid){
+					list.push(node);
+					getChildMenuNodes2(list,node.id);
+				}
+			}
+		}
+		
+		function showUserBar(){
+			$(".user-menu").show(100);
+		}
+		
+		function hideUserBar(){
+			$(".user-menu").hide(100);
+		}
+		
+		function onShowChangePwdWin() {
+			var win = mini.get("winPassword");
+			win.showAtPos("center", "middle");
+			$("#winPassword input").val("");
+			mini.get("cp_old").focus();
+		}
+		
+		function onNewPwdValidation(e){
+			if (e.isValid) {
+				var newPassword = mini.get("cp_new1").getValue();
+				var newPassword2 = mini.get("cp_new2").getValue();
+			
+                if (newPassword != newPassword2) {
+                    e.errorText = "确认密码不一致";
+                    e.isValid = false;
+                }
+            }
+		}
+		
+		function onChangePwdWinOkClick() {
+			var oldPassword = mini.get("cp_old").getValue();
+			var newPassword = mini.get("cp_new1").getValue();
+			var newPassword2 = mini.get("cp_new2").getValue();
+			
+			if( oldPassword=="" || newPassword =="" || newPassword2 == ""  ){
+				MsgBox.alert("原密码、新密码、确认密码不能为空，请填写！");	
+	            return ;
+			}
+			
+			if (newPassword != newPassword2) {
+            	MsgBox.alert("新密码和确认密码不一致！");	
+                return ;
+	        }
+             
+            var chkResult = lpCheckPwd(newPassword);
+            if(chkResult){
+            	MsgBox.alert("新密码" + chkResult + "！");	
+            	return;
+			}
+			
+			var arg = {
+				pwd1: lpPwdMd5(oldPassword),
+				pwd2: lpPwdMd5(newPassword)
+			}
+			
+			getJson("dorestpwd?",arg, true, function(re){
+				if(re.isOk){
+					mini.get("winPassword").hide();
+	            	MsgBox.alert("密码修改成功！");		            
+	            }
+	            else{
+	            	MsgBox.alert(re.msg);
+	            }
+			});
+			
+		}
+		
+		function onChangePwdWinCancelClick(){
+			mini.get("winPassword").hide();
+		}
+		
+		function onCloseClick(){
+			getJson("dologout?",null, false, function(re){
+				window.location = "login";
+			});
+		}
+		
+        ///////////////////////////
+        function showTab(node,isRefresh) {
+            var mtabs = mini.get("mainTabs");
+
+            var id = "tab$" + node.id;
+            var tab = mtabs.getTab(id);
+            if (!tab) {
+                tab = {};
+                tab._nodeid = node.id;
+                tab._pid = node.pid;
+                tab.name = id;
+                tab.title = node.text;
+                tab.showCloseButton = true;
+                var url = node.url;
+                var httpReg=new RegExp("^http:\/\/");
+                if(!httpReg.test(url))
+                	url = "#(g_path)"+node.url;
+                tab.url=url;
+                mtabs.addTab(tab);
+                mtabs.activeTab(tab);
+            }
+            else{
+            	mtabs.activeTab(tab);
+            	if(isRefresh)
+            		mtabs.reloadTab(tab);
+            }
+        }
+        
+        function clearTreeSelected(){
+        	for(var i=0; i < window.LeftTrees.length; i++){
+        		window.LeftTrees[i].selectNode(null);
+        	}
+        }
+        
+        function selectedTreeByNodeId(nodeid){
+        	for(var i=0; i < window.LeftTrees.length; i++){
+        		if(window.LeftTrees[i].getNode(nodeid)){
+        			var selectedNode = window.LeftTrees[i].getNode(nodeid);
+        			if(selectedNode){
+        				window.LeftTrees[i].selectNode(selectedNode);
+        				return window.LeftTrees[i];
+        			}
+        		}
+        	}
+        	
+        	return null;
+        }
+        
+		function onTabsActiveChanged(e) {
+			if(window.fromMenuOpen)
+				return;
+				
+            var tabs = e.sender;
+            var currentTab = tabs.getActiveTab();
+            
+            $(".level1menu-item").removeClass("active");
+            clearTreeSelected();
+            
+            if(tabs.getTab("first") == currentTab){
+            	activelevel1menu($("#menuHome"));
+            }
+            else if(currentTab._nodeid){
+            	if(currentTab._pid == "-1"){
+            		activelevel1menu($("#node_" + currentTab._nodeid));
+            		$("#node_" + currentTab._nodeid).addClass("active");
+            	}
+            	else{
+            		activelevel1menu($("#node_" + currentTab._pid));
+            		//$("#node_" + currentTab._pid).addClass("active");
+            		var treeObj = selectedTreeByNodeId(currentTab._nodeid);
+            		if(treeObj){
+            			var pNodeId = treeObj.getId().replace("tree_data_","");
+            			$("#node_" + pNodeId).addClass("active");
+            		}
+            	}
+            }
+        }
+        function onBeforeOpen(e) {
+            currentTab = tabs.getTabByEvent(e.htmlEvent);
+            if (!currentTab) {
+                e.cancel = true;                
+            }
+        }
+        
+        function refreshTab() {
+        	if(currentTab){
+        		//tabs.activeTab(currentTab);//选中标签页
+				tabs.reloadTab(currentTab);
+        	}
+        }
+        
+        function closeTab() {
+        	if(tabs.getTab("first") != currentTab)
+            	tabs.removeTab(currentTab);
+        }
+        function closeAll() {
+        	var but = [];            
+            but.push(tabs.getTab("first"));
+            tabs.removeAll(but);
+        }
+        function closeAllButFirst() {
+            var but = [currentTab];
+            but.push(tabs.getTab("first"));
+            tabs.removeAll(but);
+        }
+        
+        function onTaskClick(){
+			var tab = tabs.getTab("lp.waitdo");
+			$(".level1menu-item").removeClass("hover");
+			$(".level1menu-child-item").hide();
+			$(".arrow").removeClass("fa-angle-down");
+			if (tab) {
+				tabs.activeTab(tab);//选中标签页
+				tabs.reloadTab(tab);
+			} else {
+				var tab = {};
+				tab.name = "lp.waitdo";
+				tab.title = "系统待办";
+				tab.showCloseButton = true;//是否显示关闭按钮
+				tab.url = "#(g_path)/sys/flowctrl/showwaitdo"
+				tabs.addTab(tab);//添加标签页
+				tabs.activeTab(tab);//选中标签页
+			}	
+        }
+    	
+    	window.taskCount = 0;
+    	window.refreshWaitDoTime = null;
+    	function refreshWaitDo(){
+    		if(window.refreshWaitDoTime){
+    			clearTimeout(window.refreshWaitDoTime);
+    			window.refreshWaitDoTime = null;
+    		}
+    		
+    		var url = "#(g_path)/sys/flowctrl/waitdocount";
+    		getJson(url, null, false, function(re){
+    			if(re.isOk){
+    				$("#txtTaskCount").text(re.count);
+    				if(window.taskCount != re.count){
+    					var tabs = mini.get("mainTabs").getTabs();
+				for(var i=0; i < tabs.length; i++){
+					var frame = mini.get("mainTabs").getTabIFrameEl(tabs[i]);
+					if(frame && frame.contentWindow){
+						if(frame.contentWindow.LPPageEventReceiver){
+							frame.contentWindow.LPPageEventReceiver("waitdo");
+						}
+					}
+				}
+    				}
+    			}
+    			
+    			//五分钟刷新一次待办信息
+    			window.refreshWaitDoTime = setTimeout(refreshWaitDo, 1000 * 60 * 5);
+    		});
+    	}
+    	
+    	refreshWaitDo();
+    	
+    	var LPMainPage = {
+    		openPage : function(title,url) {
+	            var mtabs = mini.get("mainTabs");
+	            tab = {};
+	            tab.title = title;
+	            tab.showCloseButton = true;
+	            tab.url=url;
+	            mtabs.addTab(tab);
+	            mtabs.activeTab(tab);
+	        },
+	        closePage : function(win){
+	        	var tabIndex = -1;
+	        	var tabs = mini.get("mainTabs").getTabs();
+				for(var i=0; i < tabs.length; i++){
+					var frame = mini.get("mainTabs").getTabIFrameEl(tabs[i]);
+					if(frame && frame.contentWindow == win){
+						tabIndex = i;
+						break;
+					}
+				}
+				
+				if(tabIndex > -1){
+					mini.get("mainTabs").removeTab(tabIndex);
+				}
+	        },
+	        invokeEvent : function(eventName){
+	        	if(eventName == "waitdo"){
+	        		refreshWaitDo();
+	        	}
+	        	var tabs = mini.get("mainTabs").getTabs();
+				for(var i=0; i < tabs.length; i++){
+					var frame = mini.get("mainTabs").getTabIFrameEl(tabs[i]);
+					if(frame && frame.contentWindow){
+						if(frame.contentWindow.LPPageEventReceiver){
+							frame.contentWindow.LPPageEventReceiver(eventName);
+						}
+					}
+				}
+	        }
+    	}
+    </script>
+</body>
+</html>

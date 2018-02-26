@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	  <title>列表查询</title>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/default/miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/themes/bl-miniui/skin.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/scripts/miniui/res/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="#(g_path)/view/jlzz/index/assets/css/bl-miniui.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/hnjl-index.css" rel="stylesheet">
+        <link href="#(g_path)/view/jlzz/index/assets/css/font/iconfont.css" rel="stylesheet">
+	
+	  <style type="text/css">
+	    body,html {
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			
+		}
+		.lableright{
+			width: 80px;
+			text-align: right;
+		}
+	  </style>  
+  </head>
+  <body>
+  		
+    <div id="panel1" class="mini-panel" title="<i class='fa fa-chevron-down'></i>基本信息"  style="width:100%;" 
+   			 showToolbar="true"  showFooter="true" allowResize="true" collapseOnTitleClick="true" 
+			>
+    
+    <!-- -------------------------------------------------------------------- -->
+       <div id="editForm" style="padding:0px;  background: white;">
+  		<table border="0" cellpadding="1" cellspacing="1" style="table-layout:fixed; background:white; line-height:30px;">
+		    <tr>
+               <td style="width:100px;text-align:right;">用户标识</td>
+               <td style="width:300px;">
+               	<input #@bv("") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">用户编号<span style="color: red">(*)</span></td>
+               <td >
+               		<input #@bv("yhbh") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr>   
+            
+            <tr>
+               <td style="width:100px;text-align:right;">用户名称<span style="color: red">(*)</span></td>
+               <td style="width:300px;">
+               	<input #@bv("yhmc") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">所属采集器</td>
+               <td >
+               		<input id="" width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr> 
+             
+            <tr>
+               <td style="width:100px;text-align:right;">供电单位<span style="color: red">(*)</span></td>
+               <td style="width:300px;">
+               	<input #@bv("org_name") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">用户类别<span style="color: red">(*)</span></td>
+               <td >
+               		<input #@bv("yhlbdm_mc") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:100px;text-align:right;">电压等级</td>
+               <td style="width:300px;">
+               	<input #@bv("dydjdm_mc") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">是否重点用户<span style="color: red">(*)</span></td>
+               <td >
+               		<input id="" width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:110px;text-align:right;">用电类别<span style="color: red">(*)</span></td>
+               <td style="width:300px;">
+               	<input #@bv("ydlbdm_mc") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">用户状态<span style="color: red">(*)</span></td>
+               <td >
+               		<input #@bv("yhztdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:100px;text-align:right;">付费模式</td>
+               <td style="width:300px;">
+               	<input #@bv("ffmsdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">合同容量</td>
+               <td >
+               		<input #@bv("htrl")    width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr>    
+            <tr>
+               <td style="width:100px;text-align:right;">预付费类型</td>
+               <td style="width:300px;">
+               	<input #@bv("yfflxdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">运行容量<span style="color: red">(*)</span></td>
+               <td >
+               		<input #@bv("yxrl")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr>  
+            <tr>
+               <td style="width:100px;text-align:right;">费控模式</td>
+               <td style="width:300px;">
+               	<input #@bv("fkmsdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">行业类别<span style="color: red">(*)</span></td>
+               <td >
+               		<input #@bv("hyfldm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr>  
+            
+            <tr>
+               <td style="width:100px;text-align:right;">计量方式<span style="color: red">(*)</span></td>
+               <td style="width:300px;">
+               	<input #@bv("jlfsdm_mc") width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="width:100px;text-align:right;">高耗能行业类别</td>
+               <td style="width:300px;">
+               	<input #@bv("ghnhylbdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+            </tr>  
+            
+             <tr>
+               <td style="width:100px;text-align:right;">客户分群标志</td>
+               <td style="width:300px;">
+               	<input #@bv("khfqbzdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="width:100px;text-align:right;">城市农村标识</td>
+               <td style="width:300px;">
+               	<input #@bv("csncbs")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+            </tr>  
+            
+             <tr>
+               <td style="width:100px;text-align:right;">负荷性质</td>
+               <td style="width:300px;">
+               	<input #@bv("fhxzdm_mc")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+             
+            </tr>  
+            
+		</table>
+  	  </div>
+  </div>
+
+
+        <!-- ------------------------------基本信息end-------------------------- -->
+        
+         <!-- -----------------------------其他信息----------------------------- -->
+         
+		<div id="panel1" class="mini-panel" title="<i class='fa fa-chevron-down'></i>其他信息"  style="width:100%; background: white;" 
+   			 showToolbar="true" showFooter="true" allowResize="true"
+   			  collapseOnTitleClick="true" >
+    
+    	<div id="editForm" style="padding:0px;  background: white;">
+  		<table border="0" cellpadding="1" cellspacing="1" style="table-layout:fixed; line-height:30px;">
+		    <tr>
+               <td style="width:100px;text-align:right;">建档人</td>
+               <td style="width:300px;">
+               	<input #@bv("")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">建档时间</td>
+               <td >
+               		<input #@bv("cjsj")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr>   
+            
+            <tr>
+               <td style="width:100px;text-align:right;">变更人员</td>
+               <td style="width:300px;">
+               	<input #@bv("")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">变更时间</td>
+               <td >
+               		<input #@bv("czsj")  width="300px" class="mini-datepicker" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr> 
+            
+            <tr>
+               <td style="width:100px;text-align:right;">销户日期</td>
+               <td style="width:300px;">
+               	<input #@bv("xhrq")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+               
+               <td style="text-align:right;">用电地址</td>
+               <td >
+               		<input #@bv("YDDZ")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:100px;text-align:right;">备注</td>
+               <td style="width:300px;">
+               	<input #@bv("htrl")  width="300px" class="mini-textbox" showNullItem="false"  textField="text" valueField="id"readonly="readonly"/>
+               </td>
+            </tr> 
+              
+            
+		</table>
+  	</div>
+		</div>    
+ <!--  ---------------------------------其他信息end------------------------- -->
+</body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+</script>

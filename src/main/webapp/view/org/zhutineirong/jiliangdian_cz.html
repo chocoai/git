@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	  <title>列表查询</title>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  
+	  <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+  </head>
+  
+  <body>
+  	<div class="mini-clearfix ">
+       <div class="mini-col-6" style="width: 65%;">                
+         <div class="mini-panel mini-panel-success" title="基本信息" width="auto" iconCls="icon-download" collapseOnTitleClick="true">
+           <table cellpadding="6" cellspacing="1" style="width:100%;table-layout:fixed; ">
+		    <tr>
+               <td style="width:70px;text-align:right;">计量点标识<span style="color: red">(*)</span></td>
+               <td style="width:100px;">
+               	<input #@bv("jldbs") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">上网电量计量方向标志<span style="color: red">(*)</span></td>
+               <td >
+               		<input #@bv("swdljlfxbz") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>   
+            
+            <tr>
+               <td style="width:70px;text-align:right;">计量点名称<span style="color: red">(*)</span></td>
+               <td style="width:100px;">
+               	<input #@bv("jldmc") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">计量点类型<span style="color: red">(*)</span></td>
+               <td style="width:100px;">
+               		<input #@bv("jldlx_mc") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            
+            <tr>
+               <td style="width:70px;text-align:right;">供电单位编码<span style="color: red">(*)</span></td>
+               <td style="width:100px;">
+               	<input #@bv("gddwbm") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">所属厂站</td>
+               <td >
+               		<input #@bv("") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">用电类别</td>
+               <td style="width:100px;">
+               	<input #@bv("ydlbdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">所属线路或变压器</td>
+               <td >
+               		<input #@bv("") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">行业分类</td>
+               <td style="width:100px;">
+               	<input #@bv("hydldm") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">计量点用途</td>
+               <td >
+               		<input #@bv("jldytdm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">分时计费标志</td>
+               <td style="width:100px;">
+               	<input #@bv("fsjfbz") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">电压等级</td>
+               <td >
+               		<input #@bv("jldydjdm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>    
+            <tr>
+               <td style="width:70px;text-align:right;">计量点接线方式</td>
+               <td style="width:100px;">
+               	<input #@bv("jxfsdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">计量点性质</td>
+               <td >
+               		<input #@bv("jldxz") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+              <tr>
+               <td style="width:70px;text-align:right;">计量点用电容量</td>
+               <td style="width:100px;">
+               	<input #@bv("ydrl") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">所属侧</td>
+               <td >
+               		<input #@bv("sscdm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">计量点位置</td>
+               <td style="width:100px;">
+               	<input #@bv("jldwzdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">计量方式</td>
+               <td >
+               		<input #@bv("jlfsdm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+              <tr>
+               <td style="width:70px;text-align:right;">计量点类别</td>
+               <td style="width:100px;">
+               	<input #@bv("jldlbdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">计量装置分类</td>
+               <td >
+               		<input #@bv("jlzzfldm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">CT</td>
+               <td style="width:100px;">
+               	<input #@bv("ctbb") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">PT</td>
+               <td >
+               		<input #@bv("ptbb") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>
+            <tr>
+               <td style="width:70px;text-align:right;">综合倍率</td>
+               <td style="width:100px;">
+               	<input #@bv("zhbl") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">用户编号</td>
+               <td >
+               		<input #@bv("yhbh") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>  
+            <tr>
+               <td style="width:70px;text-align:right;">是否参与计算</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr>  
+		</table>
+  	</div>
+</div>
+</div>		
+	 <!-----------------------------end 基本信息-------------------------------- -->
+		
+		<!-- -----------------------star 资产信息------------------------------------ -->
+	<div class="mini-clearfix ">
+       <div class="mini-col-6" style="width: 65%;">                
+         <div class="mini-panel mini-panel-success" title="资产信息" width="auto" iconCls="icon-download" collapseOnTitleClick="true">
+           <table cellpadding="6" cellspacing="1" style="width:100%;table-layout:fixed; ">
+		    <tr>
+               <td style="width:70px;text-align:right;">电能表资产标识</td>
+               <td style="width:100px;">
+               	<input #@bv("dnbzcbs") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">资产编号</td>
+               <td >
+               		<input #@bv("zcbh") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>   
+            
+            <tr>
+               <td style="width:70px;text-align:right;">出厂编号</td>
+               <td style="width:100px;">
+               	<input #@bv("ccbh") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">制造厂家</td>
+               <td >
+               		<input #@bv("sccjbs") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            
+            <tr>
+               <td style="width:70px;text-align:right;">设备型号</td>
+               <td style="width:100px;">
+               	<input #@bv("sbxhdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:70px;text-align:right;">通信地址</td>
+               <td style="width:100px;">
+               	<input #@bv("txdz") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">通讯波特率</td>
+               <td style="width:100px;">
+               	<input #@bv("btldm") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:70px;text-align:right;">额定电压</td>
+               <td style="width:100px;">
+               	<input #@bv("eddy") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">精度等级</td>
+               <td style="width:300px;">
+               	<input #@bv("jddjdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:100px;text-align:right;">额定电流</td>
+               <td style="width:100px;">
+               	<input #@bv("eddl") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">接线方式</td>
+               <td style="width:100px;">
+               	<input #@bv("jxfsdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:70px;text-align:right;">预付费装置类型</td>
+               <td style="width:100px;">
+               	<input #@bv("yffzhlxdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">分时功能</td>
+               <td style="width:100px;">
+               	<input #@bv("fsbz") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:70px;text-align:right;">通信接口方式</td>
+               <td style="width:100px;">
+               	<input #@bv("txjkfsdm") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">拉闸功能</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:70px;text-align:right;">通信协议</td>
+               <td style="width:100px;">
+               	<input #@bv("txxydm") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            <tr>
+               <td style="width:70px;text-align:right;">冻结标志</td>
+               <td style="width:100px;">
+               	<input #@bv("djbz") class="mini-textbox" style="width: 200px"/>
+               </td>
+                <td style="width:70px;text-align:right;">表计密码</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+            
+		</table>
+  	</div>
+</div>
+</div>
+ <!-- ---------------------------end 资产信息------------------------------ -->
+
+
+<!-- -----------------------star 通讯参数------------------------------------ -->
+	<div class="mini-clearfix ">
+       <div class="mini-col-6" style="width: 65%;">                
+         <div class="mini-panel mini-panel-success" title="通讯参数" width="auto" iconCls="icon-download" collapseOnTitleClick="true">
+           <table cellpadding="6" cellspacing="1" style="width:100%;table-layout:fixed; ">
+		    <tr>
+               <td style="width:70px;text-align:right;">行电能表标识</td>
+               <td style="width:100px;">
+               	<input #@bv("yxdnbbs") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">通讯方式</td>
+               <td >
+               		<input #@bv("yxfsdm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>   
+            
+            <tr>
+               <td style="width:70px;text-align:right;">表规约</td>
+               <td style="width:100px;">
+               	<input #@bv("txdnbbs") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">计量方向</td>
+               <td >
+               		<input #@bv("jlfxdm") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            
+            <tr>
+               <td style="width:70px;text-align:right;">端内的测量点号</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+		</table>
+  	</div>
+</div>
+</div>
+ <!-- ---------------------------end 通讯参数------------------------------ -->  
+ 
+ 		
+<!-- -----------------------star其他信息------------------------------------ -->
+	<div class="mini-clearfix ">
+       <div class="mini-col-6" style="width: 65%;">                
+         <div class="mini-panel mini-panel-success" title="其他信息" width="auto" iconCls="icon-download" collapseOnTitleClick="true">
+           <table cellpadding="6" cellspacing="1" style="width:100%;table-layout:fixed; ">
+		    <tr>
+               <td style="width:70px;text-align:right;">建档人</td>
+               <td style="width:100px;">
+               	<input i#@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">建档时间</td>
+               <td >
+               		<input #@bv("cjsj") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr>   
+            
+            <tr>
+               <td style="width:70px;text-align:right;">变更人员</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+               
+               <td style="text-align:right;">变更时间</td>
+               <td >
+               		<input #@bv("czsj") class="mini-textbox" style="width: 200px"/>
+		       </td>
+            </tr> 
+            
+            <tr>
+               <td style="width:70px;text-align:right;">安装地址</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+               <td style="width:70px;text-align:right;">备注</td>
+               <td style="width:100px;">
+               	<input #@bv("") class="mini-textbox" style="width: 200px"/>
+               </td>
+            </tr> 
+		</table>
+  	</div>
+</div>
+</div>
+ <!-- ---------------------------end 其他信息------------------------------ -->  		
+     
+  
+  
+        
+</body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+</script>

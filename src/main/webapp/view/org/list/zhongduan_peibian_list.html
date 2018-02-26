@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>查询结果统计表格</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+      
+<script type="text/javascript" src="#(g_path)/js/sys/common.js"></script></head>
+<body>
+
+    
+    <div style="width:100%;">
+        <div class="mini-toolbar" style="border-bottom:0;padding:0px;">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:100%;">
+                    	<a class="mini-button" iconCls="icon-search" plain="true" onclick="onsearch()">搜索</a>
+                        <a class="mini-button" iconCls="icon-add" plain="true" onclick="onAdd()">增加</a>
+                        <a class="mini-button" iconCls="icon-edit" plain="true" onclick="onEdit()">编辑</a>
+                        <a class="mini-button" iconCls="icon-remove" plain="true" onclick="onDel()">删除</a>
+                        <span class="separator"></span>
+                        <a class="mini-button" iconCls="icon-export" plain="true" onclick="onExport()">导出</a>
+                    	<input id="btnEdit1" class="mini-buttonedit" onbuttonclick="onButtonEdit" name="a" textName="b"/>
+                    </td>
+                    <td style="white-space:nowrap;">
+                        <input id="key" class="mini-textbox" emptyText="请输入查询内容" style="width:150px;" onenter="onKeyEnter"/>   
+                        <a class="mini-button"iconCls="icon-search" onclick="search()">查询</a>
+                    </td>
+                </tr>
+            </table>           
+        </div>
+    </div>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:500px;" 
+        url="#(g_path)/zhongduan_peibian/list" idField="id" 
+        allowResize="true"  sizeList="[30,50,100,500]" pageSize="50"
+        allowCellEdit="true" allowCellSelect="true" multiSelect="true" 
+        editNextOnEnterKey="true"  editNextRowCell="true"
+        
+    >
+    
+    
+        <div property="columns">
+        	<div type="checkcolumn"></div>
+            <div type="indexcolumn">序号</div>
+            <div field="zdzcbh" width="120" headerAlign="center" align="center" allowSort="false" renderer="onActionRenderer">资产编号</div> 
+           	<div field="org_name" width="120" headerAlign="center" align="center" allowSort="false" >供电单位</div>
+           	<div field="zdmc" width="120" headerAlign="center" align="center" allowSort="false" >终端名称</div> 
+           	<div field="zddz" width="120" headerAlign="center" align="center" allowSort="false" >终端地址</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >所属线路</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >所属用户</div>
+           	<div field="zdlxdm_mc" width="120" headerAlign="center" align="center" allowSort="false" >终端类型</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >所属变压器</div>
+           	<div field="zdyxztdm_mc" width="120" headerAlign="center" align="center" allowSort="false" >运行状态</div>
+           	<div field="zdcj_mc" width="120" headerAlign="center" align="center" allowSort="false" >终端生产厂家</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >通讯规约</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >SIM卡电话号码</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >安装地址</div>
+           	<div field="" width="120" headerAlign="center" align="center" allowSort="false" >备注</div>
+            </div>
+          </div> 
+    </div>
+    <script type="text/javascript">
+ 	var winWidth = 925;
+	var winHeight = 450;
+	    mini.parse();
+	    var grid = mini.get("datagrid1");
+	    /*var sorter = new MultiSort(grid);
+	   	sorter.sort([
+	    	{ field: "id", dir: "asc" }
+	  	]); */
+		 grid.load();
+	   
+	   //打开查询页面
+	     function onsearch(){
+		 var url = "#(g_path)/zhongduan_peibian/onSearcz";
+		 var title = "终端选择框";
+		 MsgBox.openWin(url, title, winWidth, winHeight, function(win){
+		}, function(action,win){
+		
+		console.log(action);
+			grid.load(action);
+		});
+	 }
+	 
+	   function onSearch() {
+		var url = "view/sea3000/zhongduanxuanze.html";
+		var title = "新增文件接口";
+		MsgBox.openWin(url, title, winWidth, winHeight, function(win){
+		}, function(action,win){
+			if(action == "ok"){
+				onSearch();
+			}
+		});
+	}
+	
+	{
+    	var form = new mini.Form("#searchForm");
+        var param = form.getData(true, false);
+        grid.load(param);
+    }
+	 
+		//用户选择框
+		function search(){
+			var url="";
+			MsgBox.openWin(url,"用户选择框",winWidth,winHeight,function(win){
+			},function(action,win){
+				if(action=="ok"){
+					
+				}
+			})
+			
+		}
+	 
+		
+		function onAdd(){
+			var url = "#(g_path)/zhongduan_peibian/edit";
+			var title = "新增";
+			MsgBox.openWin(url, title, winWidth, winHeight, function(win){
+			}, function(action,win){
+				if(action == "ok"){
+					onSearch();
+				}
+			});
+		}
+		
+		
+		
+		 function onButtonEdit(e) {
+            var btnEdit = this;
+            mini.open({
+                url:"view/sea3000/zhongduan_peibian.html",
+                title: "选择列表",
+                width: 925,
+                height: 380,
+                ondestroy: function (action) {
+                    //if (action == "close") return false;
+                    if (action == "ok") {
+                        var iframe = this.getIFrameEl();
+                        var data = iframe.contentWindow.GetData();
+                        data = mini.clone(data);    //必须
+                        if (data) {
+                            btnEdit.setValue(data.id);
+                            btnEdit.setText(data.name);
+                        }
+                    }
+
+                }
+            });
+
+        }
+
+		
+		function onDel(){
+			var rows = grid.getSelecteds();
+			
+			if(rows.length < 1){
+				MsgBox.showWarningTips("请先勾选删除数据！");
+				return;
+			}
+			
+			MsgBox.confirm("确定要删除吗？", function(b){
+				if(b){
+					var ids = "";
+					for(var i=0; i < rows.length; i++){
+						if(ids)
+							ids += ",";
+						ids += rows[i]["JYJG"];//表ID
+					}
+					var url = "#(g_path)/zhongduan_peibian/del";
+					var param = 
+					getJson(url,{ids : ids},true,function(re){
+						if(re.isOk){
+							onSearch();
+						}
+					});
+				}
+			})
+		}
+		
+		function onEdit(){
+			var row = grid.getSelected();
+			if(row){
+				var url = "#(g_path)/zhongduan_peibian/edit" + row["jldbh"];
+				var title = "编辑";
+				MsgBox.openWin(url, title,  winWidth, winHeight, function(win){
+				}, function(action,win){
+					if(action == "ok"){
+						onSearch();
+					}
+				});
+			}
+			else{
+				MsgBox.showWarningTips("请先选择编辑数据！");
+			}
+		}
+		
+		function onExport(){
+			var columns = grid.columns;
+			console.log(columns);
+			console.log(columns[0]);
+	        function getColumns(columns) {
+	            var cols = [];
+	            for (var i = 0; i < columns.length; i++) {
+	                var column = columns[i];
+					if(column.type=="checkcolumn" || column.type=="indexcolumn")
+						continue;
+	                var col = { header: column.header, field: column.field, type: column.type };
+	                if (column.columns) {
+	                    col.columns = getColumns(column.columns);
+	                }
+	                cols.push(col);
+	
+	            }
+	            return cols;
+	        } 
+	        var columns = getColumns(columns);
+			var form = new mini.Form("#searchForm");
+	        var param = form.getData(true, false);
+	        
+			var uploadFormJq = $("#excelExportForm");
+			if (jQuery("[name=upload_iframe]").size() < 1){
+				uploadFormJq = $('<form id="excelExportForm" name="excelExportForm" target="_blank" method="post" action="/comm/busi_method/exportdata"><input name="columns" type="hidden"/><input name="data" type="hidden"/></form>');
+		        jQuery(document.body).append(uploadFormJq);
+		    }
+		    
+		    uploadFormJq.find("[name=columns]").val(mini.encode(columns));
+		    uploadFormJq.find("[name=data]").val(mini.encode(param));
+	        uploadFormJq.get(0).submit();
+		}
+    </script>
+</body>
+</html>

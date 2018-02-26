@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>用户角色维护</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+	<style type="text/css">
+	    body,html {
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			overflow: hidden;
+		}    
+	</style>  
+
+  </head>
+  <body>
+  <div id="layout1" class="mini-layout" style="width:100%;height:100%;"  borderStyle="border:solid 1px #aaa;">
+        <div title="系统用户" showProxyText="true" region="west" width="200" showSplitIcon="true">
+            <ul id="tree1" class="mini-tree" url="#(g_path)/user/userDeptTreeData" style="width:100%; height:100%; padding:5px;" 
+                showTreeIcon="true" textField="text" idField="id" parentField="pid" resultAsTree="false"
+                 expandOnLoad="0" onnodeclick="onNodeSelect" iconField="iconcls">        
+            </ul>
+        </div>
+        <div title="center" region="center">
+            <div class="mini-toolbar" style="padding:0px;">
+                <table style="width:100%;">
+                    <tr>
+                    <td style="width:100%;">
+                        <a class="mini-button" iconCls="icon-save" plain="true" onclick="save();">保存</a>
+                    </td>
+                    <td style="white-space:nowrap;">
+
+                    </td>
+                    </tr>
+                </table>
+            </div>
+            <!--撑满页面-->
+            <div class="mini-fit" >
+        		<ul id="tree2" class="mini-tree" url="#(g_path)/role/roleDeptTreeData" style="width:100%; height:100%; padding:5px;" 
+	                showTreeIcon="true" textField="text" idField="id" parentField="pid" iconField="iconcls"
+	                resultAsTree="false" expandOnLoad="0"  showCheckBox="true" checkRecursive="true">        
+	            </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+    var userTree = mini.get("tree1");
+    var roleTree = mini.get("tree2");
+
+	var saveData = {};
+    function save() {
+		var userRow = userTree.getSelectedNode();
+		var roles = roleTree.getCheckedNodes();
+		if (userRow == null || userRow.type != "user")
+		{
+			MsgBox.showWarningTips("请在左侧树中选择用户!");
+			return ;
+		}
+		
+		var userid = userRow.id;
+		var roleids = [];
+		for (var i=0; i<roles.length; i++)
+		{
+			if(roles[i].type == "role"){
+				roleids.push(roles[i]["id"])
+			}
+		}
+
+        var url = "#(g_path)/user/userRoleSave";
+        getJson(url, { userid:userid ,roleids: mini.encode(roleids) }, true, function (re) {
+            if (!re.isOk) {
+                MsgBox.showErrTips("保存失败！");
+            }
+            else {
+                MsgBox.showInfoTips("保存成功！");
+            }
+        });
+    }
+	
+	function onNodeSelect(){
+		var userRow = userTree.getSelectedNode();
+		roleTree.uncheckAllNodes();
+		if (userRow != null && userRow.type == "user"){
+			var url = "#(g_path)/user/getUserRoleList";
+	        getJson(url, { userid:userRow.id}, function (list) {
+	        	if(list.length > 0){
+		            var nodes = roleTree.findNodes(function(node){
+						for(var i=0; i < list.length; i++){
+							if(node.id == list[i]["roleid"]){
+								return true;
+							}
+						}
+					});
+					
+					roleTree.checkNodes(nodes);
+				}
+	        });
+		}
+	}
+
+</script>

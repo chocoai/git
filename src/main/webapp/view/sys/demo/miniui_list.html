@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <title>miniui列表查询界面开发示例</title>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+	  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+	  <style type="text/css">
+	    body,html {
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			overflow: hidden;
+		}
+		.lableright{
+			width: 80px;
+			text-align: right;
+		}
+	  </style>  
+  </head>
+  <body>
+  	<div id="searchForm" style="padding:3px 5px;border-bottom:0;">
+  		<table border="0" cellpadding="1" cellspacing="2" style="width:100%;table-layout:fixed;">
+		    <tr>
+		        <td class="lableright"> txt1：</td>
+		        <td style="width:120px">
+		            <input name="txt1" class="mini-textbox" style="width:100%;" />
+		        </td>
+		        <td class="lableright"> int1：</td>
+		        <td style="width:120px">
+		            <input name="int1" class="mini-textbox" style="width:100%;" />
+		        </td>
+		        <td>
+		        	
+		        </td>
+		    </tr>
+		    <tr>
+		        <td class="lableright"> ts1：</td>
+		        <td>
+		        	<input name="time1" class="mini-datepicker" value="" style="width:100%;"/>
+		        </td>
+		        <td style="text-align: center;">		             
+		            ~ 
+		        </td>
+		        <td>
+		            <input name="time2" class="mini-datepicker" value="" style="width:100%;"/>
+		        </td>
+		        <td style="padding-left: 8px">
+		        	<a class="mini-button " iconCls="icon-search" onclick="onSearch();">查询</a>
+		        </td>
+		    </tr>
+
+		</table>
+    </div>
+    <!--撑满页面-->
+    <div class="mini-fit" >
+		<div class="mini-toolbar" style="border-bottom:0;padding:0px;">
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:100%;">
+                        <a class="mini-button" iconCls="icon-add" onclick="onAdd()">增加</a>
+                        <a class="mini-button" iconCls="icon-edit" onclick="onEdit()">编辑</a>
+                        <a class="mini-button" iconCls="icon-remove" onclick="onDel()">删除</a>
+                        <span class="separator"></span>
+                        <a class="mini-button" iconCls="icon-add" onclick="onAdd2()">列表增加</a>
+                        <a class="mini-button" iconCls="icon-save" onclick="onSave()">列表保存</a>
+                        <span class="separator"></span>
+                        <a class="mini-button" iconCls="icon-import" id="btnImport">导入</a>
+                        <a class="mini-button" iconCls="icon-export" onclick="onExport()">导出</a>
+                    </td>
+                    <td style="white-space:nowrap;">
+                    	<input id="txtKey" class="mini-textbox" emptyText="请输入关键字"  onenter="onSearch2()" />
+                        <a class="mini-button " iconCls="icon-search" onclick="onSearch2();">查询</a>
+                    </td>
+                </tr>
+            </table>           
+        </div>
+        <div class="mini-fit" >
+	        <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" fitColumns="true"
+	            url="#(g_path)/sys/demo/miniui_query"  idField="id" sizeList="[30,50,100,500]" pageSize="50"
+	            allowCellEdit="true" allowCellSelect="true" multiSelect="true" allowSortColumn="false"
+	        >
+	            <div property="columns">
+	                <div type="checkcolumn" ></div>
+	                <div type="indexcolumn" ></div>
+	                <div field="txt1"  headerAlign="center" align="center" allowSort="true">txt1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div> 
+	                <div field="txt2"  headerAlign="center" align="center" allowSort="true">txt2
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="txt3"  headerAlign="center" align="center" allowSort="true">txt3
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="int1" headerAlign="center" align="center" allowSort="true">int1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="int2"  headerAlign="center" align="center" allowSort="true">int2
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="long1"  headerAlign="center" align="center" allowSort="true">long1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="num1"  headerAlign="center" align="center" allowSort="true">num1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="decimal1"  headerAlign="center" align="center" allowSort="true">decimal1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="float1"  headerAlign="center" align="center" allowSort="true">float1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="numeric1"  headerAlign="center" align="center" allowSort="true">numeric1
+	                	<input property="editor" class="mini-textbox" style="width:100%;" />
+	                </div>
+	                <div field="date1" dateFormat="yyyy-MM-dd" headerAlign="center" align="center" allowSort="true">date1
+	                	<input property="editor" class="mini-datepicker" style="width:100%;"/>
+	                </div>
+	                <div field="ts1" dateFormat="yyyy-MM-dd HH:mm:ss" headerAlign="center" align="center" allowSort="true">ts1
+	                	<input property="editor" class="mini-datepicker" format="yyyy-MM-dd HH:mm:ss" timeFormat="HH:mm:ss" style="width:100%;"/>
+	                </div>
+	                <div field="ts2" dateFormat="yyyy-MM-dd HH:mm:ss" headerAlign="center" align="center" allowSort="true">ts2
+	                	<input property="editor" class="mini-datepicker" format="yyyy-MM-dd HH:mm:ss" timeFormat="HH:mm:ss" style="width:100%;"/>
+	                </div> 
+	            </div>
+	        </div> 
+		</div>
+    </div>
+    <form id="excelExportForm" name="excelExportForm" method="post"><input name="columns" type="hidden"/><input name="data" type="hidden"/></form>
+</body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+    var grid = mini.get("datagrid1");
+    var sorter = new MultiSort(grid);
+  /* 	sorter.sort([
+    	{ field: "name", dir: "asc" }
+  	]); */
+	onSearch();
+	
+    function onSearch() {
+    	var form = new mini.Form("#searchForm");
+        var param = form.getData(true, false);
+        grid.load(param);
+    }
+	
+	function onSearch2(){
+		var param = {key : mini.get("txtKey").getValue()}
+        grid.load(param);
+	}
+	
+	function onAdd(){
+		var url = "#(g_path)/sys/demo/miniui_showedit";
+		var title = "新增详细内容";
+		MsgBox.openWin(url, title, 960, 600, function(win){
+		}, function(action,win){
+			if(action == "ok"){
+				onSearch();
+			}
+		});
+	}
+	
+	function onEdit(){
+		var row = grid.getSelected();
+		if(row){
+			var url = "#(g_path)/sys/demo/miniui_showedit?id=" + row["id"];
+			var title = "编辑详细内容";
+			MsgBox.openWin(url, title, 960, 500, function(win){
+			}, function(action,win){
+				if(action == "ok"){
+					onSearch();
+				}
+			});
+		}
+		else{
+			MsgBox.showWarningTips("请先选择编辑数据！");
+		}
+	}
+	
+	function onDel(){
+		var rows = grid.getSelecteds();
+		
+		if(rows.length < 1){
+			MsgBox.showWarningTips("请先勾选删除数据！");
+			return;
+		}
+		
+		MsgBox.confirm("确定要删除吗？", function(b){
+			if(b){
+				var ids = "";
+				for(var i=0; i < rows.length; i++){
+					if(ids)
+						ids += ",";
+					ids += rows[i]["id"];
+				}
+				var url = "#(g_path)/sys/demo/miniui_listdel";
+				var param = 
+				getJson(url,{ids : ids},true,function(re){
+					if(re.isOk){
+						onSearch();
+					}
+				});
+			}
+		})
+	}
+	
+	function onAdd2(){
+		grid.addRow({});
+	}
+	
+	function onDel2(){
+		var rows = grid.getSelecteds();
+        if (rows.length < 1) {
+            MsgBox.showSuccessTips("请先勾选删除数据！");
+            return;
+        }
+        grid.removeRows(rows);
+	}
+	
+	function onSave(){
+		grid.commitEdit();
+        grid.validate();
+        if (grid.isValid() == false) {
+            var error = grid.getCellErrors()[0];
+            grid.beginEditCell(error.record, error.column);
+            return;
+        }
+
+        var datas = grid.getChanges(null, true);
+        var json = mini.encode(datas);
+
+        var url = "#(g_path)/sys/demo/miniui_listsave";
+        var re = getJson(url, { data: json }, true, function (re) {
+            if (!re.isOk) {
+                MsgBox.showErrTips("保存失败！");
+            }
+            else {
+                MsgBox.showSuccessTips("保存成功！");
+                onSearch();
+            }
+        });
+	}
+	
+	$(function(){
+		lpsys.setImport("btnImport","onImport");
+	});
+	
+	function onImport(re){
+		if(re.isOk){
+			var list = re.data;
+			
+		}
+		else{
+			MsgBox.showErrTips(re.msg);
+		}
+	}
+	
+	function onExport(){
+		var columns = grid.columns;
+        function getColumns(columns) {
+            var cols = [];
+            for (var i = 0; i < columns.length; i++) {
+                var column = columns[i];
+
+                var col = { header: column.header, field: column.field, type: column.type };
+                if (column.columns) {
+                    col.columns = getColumns(column.columns);
+                }
+                cols.push(col);
+
+            }
+            return cols;
+        }
+        var columns = getColumns(columns);
+		var form = new mini.Form("#searchForm");
+        var param = form.getData(true, false);
+        
+		var uploadFormJq = $("#excelExportForm");
+		if (jQuery("[name=upload_iframe]").size() < 1){
+			uploadFormJq = $('<form id="excelExportForm" name="excelExportForm" target="_blank" method="post" action="#(g_path)/sys/demo/miniui_export"><input name="columns" type="hidden"/><input name="data" type="hidden"/></form>');
+	        jQuery(document.body).append(uploadFormJq);
+	    }
+	    
+	    uploadFormJq.find("[name=columns]").val(mini.encode(columns));
+	    uploadFormJq.find("[name=data]").val(mini.encode(param));
+        uploadFormJq.get(0).submit();
+	}
+</script>

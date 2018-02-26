@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>配网</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+            <link href="#(g_path)/css/font-awesome-4.7.0/css/font-awesome.min.css"
+                  rel="stylesheet" type="text/css">
+                <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+                <script src="#(g_path)/js/sys/inner/pwdcheckpolicy.js" type="text/javascript"></script>
+                <link href="#(g_path)/view/jlzz/index/treeicon.css"
+                      rel="stylesheet" type="text/css" >
+
+                    <style type="text/css">
+                        body,html {
+                            width: 100%;
+                            height: 100%;
+                            padding: 0px;
+                            margin: 0px;
+                            overflow: hidden;
+                            background: none;
+                        }
+                        .zt01 {
+                            font-family: "宋体";
+                            font-size: 13px;
+                            font-style: normal;
+                            line-height: 25px;
+                            font-weight: bold;
+                            font-variant: normal;
+                            color: #FFFFFF;
+                        }
+                        .header{
+                            background-color : #2254a1;
+                        }
+                        .mini-panel-body{
+                            background: none;
+                        }
+                    </style>
+                    </head>
+                    <body>
+                        <ul id="tree1" class="mini-tree" url="pwTreeData" style="width:100%; height:100%; padding:5px;" 
+                            showTreeIcon="true" textField="name" idField="id" parentField="pid" resultAsTree="false" 
+                            expandOnLoad="0" onnodeclick="onNodeSelect" onload="onLoad">        
+                        </ul>
+
+
+    <script type="text/javascript">
+        mini.parse();
+		
+        var tree = mini.get("tree1");
+		
+        //自动展示,expanded 的节点
+        function onLoad(e){
+        	for(var i=0; i < e.data.length; i++){
+        		var itemData = e.data[i];
+        		if(itemData.expanded){
+        			e.sender.loadNode(e.data[i]);
+        		}
+        	};
+        }
+       
+        function onNodeSelect(e) {
+            
+            
+             console.log(e);
+//           if(e.node.id=="org_0410_3"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/bumen_zhuti/edit?id='040500000007681' " //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }if(e.node.type=="org"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/biandianzhan/edit?id='260000108494100'" //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }if(e.node.type=="line"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/xianlu/edit?id=0410000408S08000378" //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }if(e.node.type=="cons"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/YongHu/edit?id=0410000009169018" //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }if(e.node.type=="tmnl"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/ZhongDuanDNL/edit?id=04100053176" //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }if(e.node.type=="meter"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/XiaoShuiDian/edit?id=0253990000022750" //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }if(e.node.type=="tq"){
+//              if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "#(g_path)/taiqu/edit?id=2222222222760155" //+e.node.id
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }else{
+//            if(window.top.LPMainPage){
+//            	var node = {
+//            		id: e.node.id,
+//            		text : e.node.name,
+//            		url : "https://www.baidu.com/"
+//            	}
+//            	window.top.LPMainPage.openPage(node,true);
+//            }
+//        }
+        
+        
+         if(e.node.type=='org'){
+                                   
+                                    if (window.top.LPMainPage) {
+                                    var node = {
+                                        id: e.node.id,
+                                        text: e.node.name,
+                                        url: "/Dahz?id="+e.node.attributes.org_no+"&type="+e.node.type
+                                    }
+                                    window.top.LPMainPage.openPage(node, true);
+                                }
+                                   
+                               }
+                               
+                               if(e.node.type=='sub'){
+                                   
+                                    if (window.top.LPMainPage) {
+                                    var node = {
+                                        id: e.node.id,
+                                        text: e.node.name,
+                                        url: "/Dahz?id="+e.node.attributes.bdzbh+"&type="+e.node.type
+                                    }
+                                    window.top.LPMainPage.openPage(node, true);
+                                }
+                                   
+                               }
+                               
+                               if(e.node.type=='line'){
+                                   
+                                    if (window.top.LPMainPage) {
+                                    var node = {
+                                        id: e.node.id,
+                                        text: e.node.name,
+                                        url: "/Dahz?id="+e.node.attributes.xlbh+"&type="+e.node.type
+                                    }
+                                    window.top.LPMainPage.openPage(node, true);
+                                }
+                                   
+                               }
+                               
+                               
+                               if(e.node.type=="cons"){
+                                if(window.top.LPMainPage){
+                                  var node = {
+                                          id: e.node.id,
+                                          text : e.node.name,
+                                          url : "/Dahz?id="+e.node.attributes.yhbh+"&type="+e.node.type
+                                  }
+                                  window.top.LPMainPage.openPage(node,true);
+                              }
+                          }
+                          
+                          
+                          if(e.node.type=="tmnl"){
+                            if(window.top.LPMainPage){
+                              var node = {
+                                      id: e.node.id,
+                                      text : e.node.name,
+                                      url : "/Dahz?id="+e.node.attributes.zdbs+"&type="+e.node.type
+                              }
+                              window.top.LPMainPage.openPage(node,true);
+                          }
+                      }
+      
+       
+        
+        
+        }
+	
+       
+    </script>
+
+                            var tree = mini.get("tree1");
+
+                            //自动展示,expanded 的节点
+                            function onLoad(e) {
+                                for (var i = 0; i < e.data.length; i++) {
+                                    var itemData = e.data[i];
+                                    if (itemData.expanded) {
+                                        e.sender.loadNode(e.data[i]);
+                                    }
+                                }
+                                ;
+                            }
+
+                            function onNodeSelect(e) {
+                                console.log(e.node.id)
+                                if (e.node.type == "line") {
+                                    if (window.top.LPMainPage) {
+                                        var node = {
+                                            id: e.node.id,
+                                            text: e.node.name,
+                                            url: "/xianlu/edit?id=410001032340" //+e.node.id
+                                        }
+                                        window.top.LPMainPage.openPage(node, true);
+                                    }
+                                } else {
+                                    if (window.top.LPMainPage) {
+                                        var node = {
+                                            id: e.node.id,
+                                            text: e.node.name,
+                                            url: "https://www.baidu.com/"
+                                        }
+                                        window.top.LPMainPage.openPage(node, true);
+                                    }
+                                }
+
+
+                            }
+
+
+                        </script>
+
+                    </body>
+                    </html>

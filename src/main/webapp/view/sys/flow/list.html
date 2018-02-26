@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>流程配置</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="#(g_path)/js/sys/common.js" type="text/javascript"></script>
+    <script src="#(g_path)/js/plupload/plupload.full.min.js" type="text/javascript" ></script>
+	<style type="text/css">
+	    body,html {
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			overflow: hidden;
+		}    
+	</style>  
+
+</head>
+<body>
+  <div class="mini-toolbar" style="padding:0px;border-bottom:0;">
+       <table style="width:100%;">
+           <tr>
+           <td style="width:100%;">
+               <a class="mini-button" iconCls="icon-add" plain="true" onclick="onAdd();">新增</a>
+               <a class="mini-button" iconCls="icon-edit" plain="true" onclick="onEdit();">编辑</a>
+               <a class="mini-button" iconCls="icon-remove" plain="true" onclick="onDel();">删除</a>
+               <span class="separator"></span>    
+			   <a class="mini-button" iconCls="icon-upload" plain="true" onclick="onExort()">导出</a>
+			   <a id="btnImport" class="mini-button" iconCls="icon-download" plain="true">导入</a> 
+           </td>
+           <td style="white-space:nowrap;">
+               <input id="txtKey" class="mini-textbox" emptyText="请输入关键字" onenter="onSearch()"  />
+               <a class="mini-button" iconCls="icon-search" plain="true" onclick="onSearch()">查询</a>
+               </td>
+           </tr>
+       </table>
+   </div>
+   <!--撑满页面-->
+   <div class="mini-fit" >
+
+       <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" fitColumns="true"
+           url="#(g_path)/sys/flow/list"  idField="id" sizeList="[30,50,100,500]" pageSize="50"
+           allowCellEdit="false" allowCellSelect="true" multiSelect="true"
+       >
+           <div property="columns">
+               <div type="checkcolumn" ></div>
+               <div type="indexcolumn" ></div>
+               <div field="flowname" width="100%" headerAlign="center" align="center" allowSort="false">流程名称 
+               </div>
+               <div field="username" width="150px" dateFormat="yyyy-MM-dd HH:mm"
+               		headerAlign="center" align="center" allowSort="false">创建人
+               </div>  
+               <div field="addtime" width="150px" dateFormat="yyyy-MM-dd HH:mm"
+               		headerAlign="center" align="center" allowSort="false">创建时间
+               </div>                                     
+           </div>
+       </div> 
+
+   </div>
+</body>
+</html>
+<script type="text/javascript">
+    mini.parse();
+    var grid = mini.get("datagrid1");
+    onSearch();
+	
+	function onAdd(){
+		var url = "#(g_path)/sys/flow/newFlow";
+		var title = "新增流程";
+		MsgBox.openWin(url, title, "450px", "250px", function(win){
+		}, function(action,win){
+			if(action == "ok"){
+				var data = win.getData();
+				var id = data.flowversionid;
+				var flowname = data.flowname;
+				onSearch();
+				
+				openEdit(id,flowname);
+			}
+		});
+	}
+	
+	function onDel(){
+		var rows = grid.getSelecteds();
+		
+		if(rows.length < 1){
+			MsgBox.showWarningTips("请先勾选删除数据！");
+			return;
+		}
+		
+		MsgBox.confirm("确定要删除吗？", function(b){
+			if(b){
+				var ids = "";
+				for(var i=0; i < rows.length; i++){
+					if(ids)
+						ids += ",";
+					ids += rows[i]["id"];
+				}
+				var url = "#(g_path)/sys/flow/del";
+				var param = 
+				getJson(url,{ids : ids},true,function(re){
+					if(re.isOk){
+						onSearch();
+					}
+				});
+			}
+		})
+	}
+	
+	function onEdit(){
+		var row = grid.getSelected();
+		if(row){
+			openEdit(row["flowversionid"],row["flowname"]);
+		}
+		else{
+			MsgBox.showWarningTips("请先选择编辑数据！");
+		}
+	}
+	
+	function openEdit(flowversionid,flowname){
+		var url = "#(g_path)/sys/flow/edit?flowversionid=" + flowversionid;
+		var title = "编辑流程-" + flowname;
+		MsgBox.openWin(url, title, "100%", "100%", function(win){
+		}, function(action,win){
+		});
+	}
+	
+    function onSearch() {
+        var param = {
+            key: mini.get("txtKey").getValue()
+        }
+
+        grid.load(param);
+    }
+
+    function onNodeSelect() {
+        onSearch();
+    }
+    
+    function onExort(){
+    	var rows = grid.getSelecteds();
+		
+		if(rows.length < 1){
+			MsgBox.showWarningTips("请先勾选导出数据！");
+			return;
+		}
+		
+		var ids = "";
+		for(var i=0; i < rows.length; i++){
+			if(ids)
+				ids +=",";
+			ids += 	rows[i]["id"];
+		}
+    	var url = "#(g_path)/sys/flow/exportsql?ids=" + ids;
+    	window.open(url);
+    }
+    
+	initImport();
+	
+	function importCallBack(re){
+		if(re.isOk){
+			MsgBox.showInfoTips("导入成功！");
+			onSearch();
+		}
+		else{
+			MsgBox.showErrTips("导入出错！");
+		}
+	}
+	
+    function initImport(){
+    	var url = "#(g_path)/sys/flow/importsql";
+		var _maxUpload = 100;
+		var uploadCtrl = new plupload.Uploader({
+	        browse_button: "btnImport", 
+	        url: url,
+	        filters: {
+	            mime_types : [
+	              { title : "txt files", extensions : "txt" }, 
+	            ],
+	            max_file_size: _maxUpload + 'Mb'
+	        },
+	        flash_swf_url: window.g_path + '/js/plupload/Moxie.swf'
+	    });
+	
+	    uploadCtrl.init();
+	    uploadCtrl.bind('FilesAdded', function (uploader, files) {
+	    	showLoading();
+	        uploader.start();
+	    });
+	    
+	    uploadCtrl.bind('FileUploaded', function (uploader, file, responseObject) {
+	    	var script = "<script>importCallBack(" +responseObject.response+ ")<\/script>";
+	        jQuery(document.body).append(script);
+	    });
+	
+	    uploadCtrl.bind('UploadComplete', function (uploader, files) {
+	        hideLoading();
+	        uploader.splice(0);
+	    });
+	
+	    uploadCtrl.bind('Error', function (uploader, errObject) {
+	        var msg = "";
+	        if (errObject.code == plupload.HTTP_ERROR) {
+	            msg = "上传文件\"" + errObject.file.name + "\"时出错：网络故障！";
+	        }
+	        else if (errObject.code == plupload.FILE_EXTENSION_ERROR) {
+	            msg = "上传文件\"" + errObject.file.name + "\"时出错：不能上传该文件类型！";
+	        }
+	        else if (errObject.code == plupload.FILE_DUPLICATE_ERROR) {
+	            msg = "上传文件\"" + errObject.file.name + "\"时出错：不能上传重名的文件！";
+	        }
+	        else if (errObject.code == plupload.FILE_SIZE_ERROR) {
+	            msg = "上传文件\"" + errObject.file.name + "\"时出错：不能上传大于(" + _maxUpload + "M)的文件！";
+	        }
+	        else {
+	            msg = "上传文件\"" + errObject.file.name + "\"时出错!";
+	        }
+	
+	        MsgBox.showErrTips(msg);
+	    });
+    }
+</script>

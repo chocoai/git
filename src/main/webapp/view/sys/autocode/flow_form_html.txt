@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	  <title>流程表单</title>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  <script src="#[[#(g_path)]]#/js/sys/common.js" type="text/javascript"></script>
+	  <link href="#[[#(g_path)]]#/css/form.css" rel="stylesheet" type="text/css">
+	  <style type="text/css">
+	   body,html {
+			width: 100%;
+			height: 100%;
+			padding: 0px;
+			margin: 0px;
+			overflow: hidden;
+	  }
+	  </style>
+	  #[[#@lpflow_js()]]#
+  </head>
+  <body>
+  	<div class="op_tool">
+  		<div class="pull_right">
+  			#[[#]]#if(g_isreadonly != "true")
+  			<a id="btnSave" class="mini-button" iconCls="icon-save" onclick="onSave();">保存</a>
+				#[[#]]#if(g_flownodetype=="0")
+				<a id="btnDel" class="mini-button" iconCls="icon-remove" onclick="onDel();">删除</a>
+				#[[#]]#else
+				<a id="btnUntread" class="mini-button" iconCls="icon-ok" onclick="onUntread();">回退</a>
+				#[[#]]#end
+  			<a id="btnSubmit" class="mini-button" iconCls="icon-ok" onclick="onSubmit();">流转</a>
+  			#[[#]]#end
+  			<a class="mini-button" iconCls="icon-close" onclick="onClose();">关闭</a> 
+        </div>    
+  	</div>
+  	<div class="mini-fit">
+  		<div id="mainTabs" class="mini-tabs" activeIndex="0" style="width:100%;height:100%;"      
+             plain="false" onactivechanged="onTabsActiveChanged">
+            <div title="xxx单">
+			  	<div id="editForm">
+			  		<table border="0" cellpadding="1" cellspacing="2" style="width:100%;table-layout:fixed;">
+					    
+					    #set(sumindex=-1, colindex=-1, colnum=2, colWidth=100/colnum)
+					    #for(col : tableMeta.columnMetas)
+					    	#if(col.name == tableMeta.primaryKey)
+					    		#if(for.last)
+					    			#for(;colindex > -1 && colindex < colnum; colindex++)
+					    	<td></td><td></td>		
+					    			#end
+					    </tr>
+					    		#end
+					    		#continue
+					    	#end
+					    	#set(sumindex=sumindex+1,colindex=colindex+1,colindex=colindex%colnum)
+					    	#if(sumindex==0)
+					    <tr class="firstRow">
+					    		#for(i=0; i < colnum;i++)
+					    	<td class="editlabel"></td>
+					    	<td style="width:#(colWidth)%"></td>
+					    		#end
+					    	#end
+					    	#if(colindex==0)
+					    </tr>
+					    <tr>
+					    	#end
+					        <td class="editlabel">#(col.remarks ?? col.name)：</td>
+					        <td>
+					            <input #[[#@bv]]#("#(col.name)") #if(col.javaType=="java.util.Date") class="mini-datepicker" format="yyyy-MM-dd" #else class="mini-textbox" #end style="width:100%" />
+					        </td>
+					     	#if(for.last)
+					     			#for(colindex++;colindex > -1 && colindex < colnum; colindex++)
+					    	<td></td><td></td>	
+					    			#end
+					    </tr>
+					    	#end
+					    #end
+					</table>
+			  	</div>
+			</div>
+			<div name="flowlog" title="流程日志" url="#[[#]]#(g_path)/sys/flowctrl/showlog?i=#[[#]]#(g_flowinstanceid)&flowversionid=#[[#]]#(g_flowversionid)">
+        	</div>
+		</div>
+	</div>
+  	
+  	<script type="text/javascript">
+  		mini.parse();
+  		
+  		pageInit();
+  		function pageInit(){
+  			// js页面权限控制
+  			if(window.g_isreadonly == "true"){
+  				new mini.Form("#editForm").setEnabled(false);
+  			}
+  		}
+  		
+  		function onDel(){
+  			var url = "#[[#(g_path)]]##(controllerPath)/delflow";
+  			var param = {
+  				g_iscreateform : "#[[#]]#(g_iscreateform)",
+  				g_flowinstanceid : "#[[#]]#(g_flowinstanceid)"
+  			};
+
+  			getJson(url,param,true,function(re){
+  				if(re.isOk && re.isNeedRefresh){
+  					MsgBox.showSuccessTips("提交成功！");
+  					LPFlowKit.refreshWaitDo();
+					LPFlowKit.closePage();
+  				}
+  			});
+  		}
+  		
+  		function onSave(){
+  			mySave();
+  		}
+  		
+  		function mySave(callBack){
+  			var url = "#[[#(g_path)]]##(controllerPath)/saveflow";
+  			/* 表单数据检验
+  			if(window.g_flownodename == "填报"){
+	  			var tbForm = new mini.Form("#trTB");
+	  			tbForm.validate();
+	            if (tbForm.isValid() == false) return; 
+            }*/
+            
+  			var form = new mini.Form("#editForm");
+            var param = form.getData(true, false);
+            LPFlowKit.save(url, param, callBack);
+  		}
+  		
+  		function onSubmit(){
+  			mySave(function(re){
+  				LPFlowKit.submit();
+  			});
+  		}
+  		
+  		function onUntread(){
+  			mySave(function(re){
+  				LPFlowKit.untread();
+  			});
+  		}
+  		
+  		
+  		function onViewLog(){
+  			LPFlowKit.viewLog();
+  		}
+  		
+  		function onClose(){
+  			LPFlowKit.closePage();
+  		}
+  		
+  		function onTabsActiveChanged(e) {
+            var tabs = e.sender;
+            var tab = tabs.getActiveTab();
+            if (tab && tab.name=="flowlog") {
+            	if(!window.flowlogtabrefresh && window.g_iscreateform=="false")
+                	tabs.reloadTab(tab);
+                
+                if(window.g_iscreateform=="false"){
+            		window.flowlogtabrefresh = true;
+            	}
+            }
+        }
+  	</script>
+  </body>
+</html>
